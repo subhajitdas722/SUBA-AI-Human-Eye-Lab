@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#08111e">
+<title>SUBA AI | Human Eye Anatomy Lab</title>
+<link rel="stylesheet" href="style.css">
+<script type="importmap">
+{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.185.1/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.185.1/examples/jsm/"}}
+</script>
+</head>
+<body>
+<header><div class="brand">SUBA <b>AI</b><small>PHYSICS LAB · HUMAN EYE</small></div><div class="topnote">Interactive anatomical model</div></header>
+<main>
+<section class="viewer">
+ <div class="viewbar"><div><span class="eyebrow">3D SPECIMEN</span><h1 id="modeTitle">Internal anatomy</h1></div>
+ <div class="tabs"><button class="tab active" data-mode="anatomy">Anatomy</button><button class="tab" data-mode="exterior">Exterior</button></div></div>
+ <div id="stage"><div id="loading">Loading anatomical GLB…</div></div>
+ <div class="toolbar"><button id="reset">Reset view</button><button id="isolate">Isolate selected</button><button id="showAll">Show all</button><button id="explode">Explode layers</button></div>
+ <p class="hint">Drag to rotate · Scroll/pinch to zoom · Select a structure from the list</p>
+</section>
+<aside>
+ <section class="panel">
+ <div class="eyebrow">STRUCTURE EXPLORER</div><h2>Eye anatomy</h2>
+ <input id="search" placeholder="Search structures…" aria-label="Search structures">
+ <div id="structureList"></div>
+ </section>
+ <section class="panel detail"><div class="eyebrow">SELECTED STRUCTURE</div><h2 id="selectedName">Select a structure</h2><p id="selectedDesc">Choose a structure to highlight it and view its controls.</p>
+ <label class="rangeLabel">Opacity <output id="opacityValue">100%</output></label><input id="opacity" type="range" min="10" max="100" value="100">
+ <button id="hideSelected" class="wide">Hide selected</button>
+ </section>
+ <section class="panel note"><b>Teaching note</b><p>This anatomy model contains 23 separately named GLB meshes. Some anatomical regions are grouped in the source model; do not interpret each mesh as a histologically isolated tissue.</p></section>
+</aside>
+</main>
+<footer>SUBA AI · Educational visualization · Not for clinical diagnosis · Model attribution in <code>licenses/ATTRIBUTION.txt</code></footer>
+<script type="module" src="app.js"></script>
+</body></html>
