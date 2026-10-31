@@ -85,3 +85,133 @@ input[type=range]{width:100%;accent-color:#52cbc5}.wide{width:100%;margin-top:12
 /* Smooth callout tracking: let JS own position; keep paint-only transitions. */
 .anatomy-callout{transition:border-color .16s ease,background .16s ease,box-shadow .16s ease!important}
 .callout-anchor-halo,.callout-anchor-dot,.callout-connector{filter:none}
+
+
+/* ========================= STUDENT LEARNING STUDIO ========================= */
+.learning-hub{
+ max-width:1500px;margin:8px auto 24px;padding:22px;
+ background:linear-gradient(145deg,#0d1b2a,#0b1725 62%,#0d202e);
+ border:1px solid #263c50;border-radius:20px;
+}
+.learning-heading{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:20px}
+.learning-heading h2{font-size:25px;letter-spacing:-.025em;margin:5px 0 4px}
+.learning-heading p,.tool-intro p{color:#9eb3c6;font-size:13px;margin:0}
+.learning-progress{width:min(300px,38%);padding:12px 14px;border:1px solid #2a4257;border-radius:12px;background:#0a1725}
+.progress-caption{display:block;font-size:8px;font-weight:800;letter-spacing:.16em;color:#73cbc7;margin-bottom:4px}
+.learning-progress strong{font-size:12px;color:#e9f5ff}
+.progress-track,.quiz-progress{height:6px;background:#203449;border-radius:999px;overflow:hidden;margin-top:9px}
+.progress-track span,.quiz-progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,#36aaa7,#83e4d7);border-radius:999px;transition:width .3s ease}
+.study-tabs{display:flex;gap:7px;flex-wrap:wrap;padding:6px;border-radius:12px;background:#091624;border:1px solid #1f3448;margin-bottom:14px}
+.study-tab{display:flex;align-items:center;gap:9px;padding:10px 14px!important;background:transparent!important;border-color:transparent!important;color:#9fb3c5!important;font-size:12px;font-weight:700}
+.study-tab span{font-size:9px;color:#5d94a2;letter-spacing:.1em}
+.study-tab.active{background:#173c4b!important;border-color:#2e6870!important;color:#eafffb!important}
+.study-tab.active span{color:#78e3d9}
+.study-panel{min-height:330px;padding:18px;border:1px solid #223a50;border-radius:14px;background:rgba(14,30,46,.82)}
+.study-panel[hidden],.quiz-result[hidden],.quiz-feedback[hidden]{display:none}
+.lesson-layout{display:grid;grid-template-columns:245px minmax(0,1fr);gap:18px}
+.lesson-rail{padding-right:14px;border-right:1px solid #263c50}
+.lesson-list{display:flex;flex-direction:column;gap:6px;margin-top:12px}
+.lesson-step{display:grid;grid-template-columns:30px minmax(0,1fr) 18px;align-items:center;gap:9px;width:100%;padding:9px 8px!important;text-align:left;background:transparent!important;border:1px solid transparent!important}
+.lesson-step:hover,.lesson-step.active{background:#153448!important;border-color:#2a5d6a!important}
+.lesson-step-number{width:28px;height:28px;display:grid;place-items:center;background:#172c40;border:1px solid #2c435a;border-radius:8px;color:#86b6c4;font-size:10px;font-weight:800}
+.lesson-step.active .lesson-step-number{background:#2b7777;color:#effffb;border-color:#55b9ad}
+.lesson-step-copy{min-width:0;display:flex;flex-direction:column;gap:2px}
+.lesson-step-copy strong{font-size:11px;color:#e3eff8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lesson-step-copy small{font-size:9px;color:#7893a8}
+.lesson-step-check{color:#7fe0c8;font-weight:900;font-size:13px}
+.lesson-card{padding:2px 6px 0}
+.lesson-meta{display:flex;gap:8px;align-items:center;color:#77d6d0;font-size:9px;font-weight:800;letter-spacing:.13em}
+.lesson-meta span+span{padding:4px 7px;border:1px solid #2a5c66;border-radius:999px;background:#12313e}
+.lesson-card h3,.tool-intro h3{font-size:22px;letter-spacing:-.02em;margin:10px 0 6px;color:#f0f7ff}
+.lesson-lead{font-size:15px;color:#b9d5df;margin:0 0 14px}
+.lesson-explanation{font-size:13px;line-height:1.75;color:#d0deeb;max-width:850px}
+.exam-tip{margin-top:16px;padding:12px 14px;border-left:3px solid #5fc9bf;border-radius:0 10px 10px 0;background:rgba(30,85,88,.23)}
+.exam-tip strong{font-size:10px;letter-spacing:.12em;color:#83e2d5;text-transform:uppercase}
+.exam-tip p{font-size:12px;color:#d2e5ed;margin:5px 0 0;line-height:1.6}
+.lesson-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:17px}
+.lesson-spacer{flex:1}
+.button-primary,.button-secondary,.button-quiet{font-size:11px!important;font-weight:750;padding:9px 13px!important}
+.button-primary{background:#176d72!important;border-color:#3ba6a1!important;color:#f2fffe!important}
+.button-primary:hover{background:#21858a!important}
+.button-secondary{background:#172d42!important;border-color:#34506a!important;color:#d4e8f5!important}
+.button-quiet{background:transparent!important;border-color:transparent!important;color:#9cb3c5!important}
+button:disabled{opacity:.35;cursor:not-allowed;filter:saturate(.4)}
+.lesson-status{font-size:10px;color:#7f9db0;min-height:16px;margin:10px 0 0}
+.is-complete{border-color:#368a77!important;background:#12453f!important;color:#caffed!important}
+.tool-intro{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:15px}
+.tool-intro strong{color:#7dd7ce;font-size:10px;letter-spacing:.12em;white-space:nowrap}
+.tool-intro h3{margin:4px 0}.tool-intro p{max-width:700px}
+.flashcard-wrap{display:flex;justify-content:center;padding:8px 0 14px}
+.flashcard{width:min(680px,100%);min-height:220px;padding:22px!important;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;background:radial-gradient(ellipse at 50% 10%,#1d5260,#102638 74%)!important;border:1px solid #3c7780!important;border-radius:17px!important;white-space:normal;box-shadow:0 15px 40px rgba(0,0,0,.23)}
+.flashcard-top{width:100%;display:flex;justify-content:space-between;gap:10px;color:#83d9d0;font-size:8px;font-weight:800;letter-spacing:.14em}
+.flashcard-term{font-size:22px;font-weight:800;line-height:1.35;max-width:560px}
+.flashcard-answer{max-width:550px;color:#dbebf2;font-size:14px;line-height:1.65;font-weight:500}
+.flashcard-hint{color:#95b5c4;font-size:10px;letter-spacing:.08em}
+.flashcard.revealed{background:radial-gradient(ellipse at 50% 10%,#245c57,#102638 75%)!important}
+.flashcard-controls{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}
+.quiz-progress{margin:-3px 0 15px}
+.quiz-card{max-width:850px;margin:auto;padding:18px;border:1px solid #294459;border-radius:13px;background:#0c1a29}
+.quiz-topic{font-size:9px;letter-spacing:.16em;font-weight:850;color:#7edbd1}
+.quiz-card h3{font-size:18px;line-height:1.5;margin:9px 0 16px}
+.quiz-options{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.quiz-option{display:flex;align-items:center;gap:10px;text-align:left;padding:11px!important;background:#14283c!important;border:1px solid #304b62!important}
+.quiz-option:hover:not(:disabled){border-color:#60c8bf!important;background:#173c4b!important}
+.option-letter{width:25px;height:25px;display:grid;place-items:center;border-radius:7px;background:#223c51;color:#a9d8d6;font-size:10px;font-weight:850;flex:none}
+.option-text{font-size:12px;color:#dce9f3}
+.quiz-option.correct{border-color:#3a9a78!important;background:#123b35!important}
+.quiz-option.correct .option-letter{background:#2b8d6d;color:white}
+.quiz-option.incorrect{border-color:#b05c64!important;background:#462630!important}
+.quiz-feedback{padding:11px 13px;border-radius:9px;margin-top:13px;background:#152b3d;border:1px solid #37536a}
+.quiz-feedback strong{font-size:12px}
+.quiz-feedback p{font-size:12px;color:#c8d9e5;margin:4px 0 0;line-height:1.6}
+.quiz-feedback.correct{border-color:#327c67;background:#12352f}
+.quiz-feedback.correct strong{color:#8be2c4}
+.quiz-feedback.incorrect{border-color:#8e4d5a;background:#3b242f}
+.quiz-feedback.incorrect strong{color:#ffb3ad}
+.quiz-actions{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:15px}
+.quiz-actions span{font-size:11px;color:#98b3c5;font-weight:750}
+.quiz-result{max-width:680px;margin:14px auto 0;padding:24px;text-align:center;border:1px solid #347b76;border-radius:14px;background:#102e35}
+.quiz-result h3{font-size:23px;margin:8px}
+.quiz-result p{color:#c0d5df;font-size:13px;line-height:1.6}
+.glossary-search{width:100%;padding:11px 13px;background:#091725;color:#f2f8ff;border:1px solid #35516a;border-radius:9px;margin:0 0 14px;font:inherit;font-size:12px}
+.glossary-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+.glossary-item{padding:12px;border:1px solid #263f54;border-radius:10px;background:#0d1d2c}
+.glossary-item h4{font-size:12px;color:#88e0d5;margin:0 0 6px}
+.glossary-item p{font-size:11px;line-height:1.55;color:#b9cad8;margin:0}
+.glossary-empty{color:#a9bdce;font-size:12px;text-align:center;padding:22px}
+.learning-footnote{margin-top:13px;padding:11px 14px;color:#9eb6c6;font-size:11px;background:rgba(21,48,67,.6);border:1px solid #233c51;border-radius:10px}
+.learning-footnote strong{color:#75d9d0}
+@media(max-width:900px){
+ .learning-hub{margin:8px 12px 20px;padding:15px}
+ .learning-heading{align-items:flex-start;flex-direction:column}
+ .learning-progress{width:100%}
+ .lesson-layout{grid-template-columns:1fr}
+ .lesson-rail{padding:0 0 13px;border-right:0;border-bottom:1px solid #263c50}
+ .lesson-list{display:grid;grid-template-columns:1fr 1fr}
+ .lesson-card{padding:5px 2px}
+ .glossary-list{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:560px){
+ .learning-hub{margin:6px 8px 16px;padding:11px;border-radius:14px}
+ .learning-heading h2{font-size:21px}
+ .study-tabs{display:grid;grid-template-columns:1fr 1fr}
+ .study-tab{justify-content:flex-start;padding:9px 8px!important}
+ .study-panel{padding:11px;min-height:280px}
+ .lesson-list{gap:4px}
+ .lesson-step{grid-template-columns:25px minmax(0,1fr) 14px;padding:7px 4px!important;gap:5px}
+ .lesson-step-number{width:24px;height:24px;font-size:9px}
+ .lesson-step-copy strong{font-size:10px}
+ .lesson-card h3,.tool-intro h3{font-size:19px}
+ .lesson-lead{font-size:13px}
+ .lesson-explanation{font-size:12px}
+ .lesson-actions{gap:5px}
+ .lesson-actions button{padding:8px 9px!important;font-size:10px!important}
+ .flashcard{min-height:205px;padding:15px!important}
+ .flashcard-term{font-size:18px}
+ .flashcard-answer{font-size:12px}
+ .quiz-options{grid-template-columns:1fr}
+ .quiz-card{padding:12px}
+ .quiz-card h3{font-size:16px}
+ .glossary-list{grid-template-columns:1fr}
+ .tool-intro{align-items:flex-start;flex-direction:column}
+}
