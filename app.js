@@ -173,6 +173,7 @@ function layoutModelLabels(){
  const width=stage.clientWidth,height=stage.clientHeight;
  const compact=width<720;
  const cardWidth=compact?120:158;
+ const cardHeight=compact?30:36;
  const edgeGap=compact?6:12;
  camera.updateMatrixWorld(true);
  labelItems.forEach(item=>{
@@ -190,8 +191,9 @@ function layoutModelLabels(){
   items.forEach((item,index)=>{
    item.layoutX=side==='left'?edgeGap:Math.max(edgeGap,width-cardWidth-edgeGap);
    item.layoutY=items.length===1?(top+bottom)/2:top+(bottom-top)*index/(items.length-1);
+   item.cardWidth=cardWidth;item.cardHeight=cardHeight;
    item.el.style.left=item.layoutX+'px';
-   item.el.style.top=item.layoutY+'px';
+   item.el.style.top=(item.layoutY-cardHeight/2)+'px';
    item.el.style.width=cardWidth+'px';
   });
  }
@@ -230,8 +232,8 @@ function updateModelLabels(dt=1/60){
   item.el.style.display='grid';
   item.el.classList.toggle('is-active',item.entity===selected);
   item.el.style.transform='translate3d(0,0,0)';
-  const cardWidth=item.el.offsetWidth||158;
-  const cardHeight=item.el.offsetHeight||36;
+  const cardWidth=item.cardWidth||158;
+  const cardHeight=item.cardHeight||36;
   const cardX=item.layoutX,cardY=item.layoutY;
   const edgeX=item.side==='left'?cardX+cardWidth:cardX;
   const edgeY=cardY+cardHeight/2;
