@@ -533,3 +533,276 @@ let previousFrameTime=0;
 function animate(now=0){requestAnimationFrame(animate);const dt=previousFrameTime?Math.min((now-previousFrameTime)/1000,0.05):1/60;previousFrameTime=now;controls.update();updateModelLabels(dt);renderer.render(scene,camera);}
 start();
 animate();
+
+
+/* ==========================================================
+   SUBA AI STUDENT LEARNING STUDIO
+   Guided lessons, browser-saved revision progress, flashcards,
+   formative quiz and searchable glossary.
+   ========================================================== */
+const studyLessons=[
+ {
+  title:'The cornea',tag:'REFRACTION',structure:'Cornea',
+  lead:'The clear, curved window at the front of the eye.',
+  body:'Light first enters the eye through the cornea. Because of its curved surface and the difference in refractive index between air and corneal tissue, it bends incoming light strongly. The cornea provides most of the eye’s focusing power.',
+  exam:'The cornea is transparent and has no blood vessels. It provides most of the refractive power; the crystalline lens fine-adjusts the focus.',
+  duration:'2 min'
+ },
+ {
+  title:'The iris and pupil',tag:'LIGHT CONTROL',structure:'Iris',
+  lead:'A coloured diaphragm controls the opening through which light enters.',
+  body:'The pupil is the opening at the centre of the iris. The iris contains circular and radial muscles that change pupil size. In bright light the pupil becomes smaller; in dim light it becomes larger. This helps regulate the amount of light entering the eye.',
+  exam:'The iris controls pupil size. The pupil is an opening, not a solid part or a muscle.',
+  duration:'2 min'
+ },
+ {
+  title:'The crystalline lens',tag:'FOCUSING',structure:'Crystalline lens',
+  lead:'A transparent, flexible, biconvex lens fine-tunes the image on the retina.',
+  body:'The lens changes its curvature to focus objects at different distances. For a nearby object it becomes thicker and more convex; for a distant object it becomes thinner. This adjustment is called accommodation.',
+  exam:'Accommodation is the change in focal length of the eye lens to focus near and distant objects on the retina.',
+  duration:'3 min'
+ },
+ {
+  title:'Suspensory ligaments',tag:'ACCOMMODATION',structure:'Suspensory ligaments',
+  lead:'Fine fibres connect the lens capsule to the ciliary body.',
+  body:'The suspensory ligaments, also called zonular fibres, transmit changes in tension from the ciliary muscle to the lens. When the ciliary muscle contracts, zonular tension is reduced and the elastic lens becomes rounder for near vision. When the muscle relaxes, the lens becomes flatter for distant vision.',
+  exam:'Do not confuse the ciliary muscle with the suspensory ligaments: the muscle changes tension; the fibres transmit that change to the lens.',
+  duration:'3 min'
+ },
+ {
+  title:'The retina',tag:'LIGHT DETECTION',structure:'Retina',
+  lead:'The light-sensitive neural layer converts light into electrical signals.',
+  body:'The retina contains photoreceptor cells called rods and cones. Rods are very sensitive in dim light and are important for night vision. Cones work best in brighter light and provide colour vision and fine detail. The signals are processed by retinal neurons and travel towards the brain through the optic nerve.',
+  exam:'The image formed on the retina of a normal eye is real and inverted. The fovea has a high density of cones and provides sharp central vision.',
+  duration:'3 min'
+ },
+ {
+  title:'The sclera and choroid',tag:'PROTECTION',structure:'Sclera',
+  lead:'Two important layers protect and support the eyeball.',
+  body:'The sclera is the tough, white outer coat that helps maintain the shape of the eyeball and protects its inner structures. The choroid lies inside the sclera. It is rich in blood vessels that nourish the outer retina, and its pigment helps absorb stray light inside the eye.',
+  exam:'Remember the order from outside to inside: sclera → choroid → retina.',
+  duration:'2 min'
+ }
+];
+const studyFlashcards=[
+ {category:'ANATOMY',front:'What is the main optical role of the cornea?',back:'The cornea provides most of the eye’s refractive power and bends incoming light towards the retina.'},
+ {category:'ANATOMY',front:'What is the difference between the iris and the pupil?',back:'The iris is the coloured muscular diaphragm. The pupil is the opening at its centre through which light enters.'},
+ {category:'ANATOMY',front:'What is accommodation?',back:'Accommodation is the change in curvature and focal length of the eye lens so that near and distant objects are focused on the retina.'},
+ {category:'ANATOMY',front:'Which structures help the lens change its shape?',back:'The ciliary muscle and suspensory ligaments (zonular fibres) work together to change tension on the lens.'},
+ {category:'ANATOMY',front:'What are rods and cones?',back:'Rods are highly sensitive in dim light. Cones support colour vision and sharp detail in brighter light.'},
+ {category:'ANATOMY',front:'What is the fovea?',back:'The fovea is a small central region of the retina with a high density of cones. It provides the sharpest central vision.'},
+ {category:'ANATOMY',front:'What is the blind spot?',back:'The optic disc is the point where the optic nerve leaves the eye. It has no rods or cones, so light falling there is not detected.'},
+ {category:'ANATOMY',front:'What does the choroid do?',back:'The choroid is a vascular, pigmented layer. It supplies nutrients to the outer retina and absorbs stray light.'},
+ {category:'VISION DEFECTS',front:'What is myopia?',back:'Myopia (short-sightedness) makes distant objects appear blurred. The image tends to form in front of the retina. It is corrected using a diverging (concave) lens.'},
+ {category:'VISION DEFECTS',front:'What is hypermetropia?',back:'Hypermetropia (long-sightedness) makes nearby objects appear blurred. The image tends to form behind the retina. It is corrected using a converging (convex) lens.'},
+ {category:'VISION DEFECTS',front:'What is presbyopia?',back:'Presbyopia is an age-related reduction in the eye’s accommodation, often making near focusing difficult. Suitable near correction may use convex lenses; some people need bifocal or progressive lenses.'},
+ {category:'VISION DEFECTS',front:'What is the near point of a normal young adult eye?',back:'The conventional least distance of distinct vision is approximately 25 cm for a normal adult eye.'}
+];
+const studyQuestions=[
+ {topic:'ANATOMY',q:'Which structure provides most of the refractive power of the human eye?',options:['Cornea','Iris','Retina','Optic nerve'],answer:0,why:'The curved cornea provides most of the eye’s refractive power. The lens fine-adjusts the focus by accommodation.'},
+ {topic:'ANATOMY',q:'Which structure controls the diameter of the pupil?',options:['Sclera','Iris','Choroid','Retina'],answer:1,why:'The iris contains muscles that make the pupil smaller in bright light and larger in dim light.'},
+ {topic:'ACCOMMODATION',q:'When focusing on a nearby object, what happens to the eye lens?',options:['It becomes flatter','It becomes thicker and more convex','It becomes opaque','It moves in front of the cornea'],answer:1,why:'For near vision, the ciliary muscle contracts, zonular tension decreases and the elastic lens becomes rounder.'},
+ {topic:'RETINA',q:'Which photoreceptors are especially important for colour vision in bright light?',options:['Rods','Cones','Bipolar cells','Ganglion cells'],answer:1,why:'Cones support colour vision and fine detail, especially under brighter conditions. Rods are more sensitive in dim light.'},
+ {topic:'IMAGE FORMATION',q:'For a normal relaxed eye viewing a distant object, where is the image formed?',options:['In front of the cornea','Behind the retina','On the retina','On the iris'],answer:2,why:'The eye focuses a real, inverted image on the retina. The brain interprets the visual signals.'},
+ {topic:'VISION DEFECTS',q:'A person sees nearby objects clearly but distant objects appear blurred. Which correction is generally used for myopia?',options:['Convex lens','Concave lens','Cylindrical lens only','Plane glass'],answer:1,why:'In myopia, parallel rays from distant objects focus in front of the retina. A concave (diverging) lens moves the focus back onto the retina.'},
+ {topic:'VISION DEFECTS',q:'Which lens is generally used to correct hypermetropia?',options:['Concave lens','Convex lens','Plane mirror','Prism only'],answer:1,why:'A convex (converging) lens helps bring the image of a nearby object forward onto the retina.'},
+ {topic:'VISION DEFECTS',q:'Presbyopia is most directly associated with which change?',options:['Loss of retinal pigments','Age-related reduction in accommodation','Excessive pupil dilation','Damage to the optic disc in every case'],answer:1,why:'Presbyopia occurs with age as the lens becomes less flexible and the accommodation system becomes less effective.'}
+];
+const studyGlossary=[
+ ['Accommodation','The process by which the eye changes the focal length of its lens to focus objects at different distances.'],
+ ['Aqueous humour','A clear fluid in the front part of the eye that nourishes the cornea and lens and helps maintain intraocular pressure.'],
+ ['Blind spot','The optic disc, where the optic nerve exits the eye. It has no photoreceptors.'],
+ ['Ciliary muscle','A ring of smooth muscle that changes tension on the suspensory ligaments during accommodation.'],
+ ['Choroid','A vascular, pigmented layer between the sclera and retina.'],
+ ['Cornea','The transparent curved front surface of the eye; it supplies most of the eye’s refractive power.'],
+ ['Fovea','The central retinal region with a high cone density and the greatest visual acuity.'],
+ ['Hypermetropia','Long-sightedness; near objects are blurred and correction generally uses a convex lens.'],
+ ['Iris','The coloured muscular diaphragm that regulates pupil diameter.'],
+ ['Lens','A transparent, flexible, biconvex structure that fine-focuses light onto the retina.'],
+ ['Myopia','Short-sightedness; distant objects are blurred and correction generally uses a concave lens.'],
+ ['Optic nerve','A bundle of retinal ganglion-cell axons that carries visual information towards the brain.'],
+ ['Presbyopia','An age-related reduction in accommodation, commonly causing difficulty focusing on near objects.'],
+ ['Pupil','The opening in the iris through which light enters the eye.'],
+ ['Retina','The light-sensitive neural tissue lining the back of the eye.'],
+ ['Rods','Photoreceptors that are highly sensitive in dim light and support night vision.'],
+ ['Sclera','The tough, white outer coat of the eyeball.'],
+ ['Suspensory ligaments','Zonular fibres connecting the ciliary body to the lens capsule.'],
+ ['Vitreous humour','A transparent gel that fills the large cavity behind the lens and helps maintain the shape of the eyeball.']
+];
+const studyState={lesson:0,card:0,cardRevealed:false,quiz:0,score:0,answered:false,completed:new Set()};
+const lessonStorageKey='subaEyeLessonsV1';
+try{
+ const saved=JSON.parse(localStorage.getItem(lessonStorageKey)||'[]');
+ if(Array.isArray(saved))saved.forEach(i=>{if(Number.isInteger(i)&&i>=0&&i<studyLessons.length)studyState.completed.add(i);});
+}catch(error){console.info('Lesson progress storage is unavailable in this browser.');}
+function studySetTab(name){
+ document.querySelectorAll('.study-tab').forEach(tab=>{
+  const active=tab.dataset.studyTab===name;
+  tab.classList.toggle('active',active);
+  tab.setAttribute('aria-selected',String(active));
+ });
+ document.querySelectorAll('[data-study-panel]').forEach(panel=>{
+  panel.hidden=panel.dataset.studyPanel!==name;
+ });
+}
+document.querySelectorAll('.study-tab').forEach(tab=>tab.addEventListener('click',()=>studySetTab(tab.dataset.studyTab)));
+function updateStudyProgress(){
+ const count=studyState.completed.size;
+ document.querySelector('#studyProgressText').textContent=count+' of '+studyLessons.length+' lessons revised';
+ document.querySelector('#studyProgressBar').style.width=(count/studyLessons.length*100)+'%';
+}
+function saveStudyProgress(){
+ try{localStorage.setItem(lessonStorageKey,JSON.stringify([...studyState.completed]));}catch(error){console.info('Could not save revision progress.');}
+}
+function renderLesson(){
+ const index=studyState.lesson,lesson=studyLessons[index];
+ document.querySelector('#lessonNumber').textContent='LESSON '+String(index+1).padStart(2,'0')+' / '+String(studyLessons.length).padStart(2,'0');
+ document.querySelector('#lessonTag').textContent=lesson.tag;
+ document.querySelector('#lessonTitle').textContent=lesson.title;
+ document.querySelector('#lessonLead').textContent=lesson.lead;
+ document.querySelector('#lessonBody').textContent=lesson.body;
+ document.querySelector('#lessonExamTip').textContent=lesson.exam;
+ document.querySelector('#lessonComplete').textContent=studyState.completed.has(index)?'✓ Revised':'Mark as revised';
+ document.querySelector('#lessonComplete').classList.toggle('is-complete',studyState.completed.has(index));
+ document.querySelector('#lessonPrev').disabled=index===0;
+ document.querySelector('#lessonNext').textContent=index===studyLessons.length-1?'Back to first lesson ↺':'Next lesson →';
+ const entity=entities.find(e=>e.label===lesson.structure);
+ document.querySelector('#lessonFocus').disabled=!entity;
+ document.querySelector('#lessonStatus').textContent=studyState.completed.has(index)?'You have marked this lesson as revised.':'Read the key idea and exam reminder, then mark this lesson as revised.';
+ document.querySelector('#lessonList').innerHTML='';
+ studyLessons.forEach((item,i)=>{
+  const button=document.createElement('button');
+  button.type='button';button.className='lesson-step'+(i===index?' active':'')+(studyState.completed.has(i)?' done':'');
+  button.innerHTML='<span class="lesson-step-number"></span><span class="lesson-step-copy"><strong></strong><small></small></span><span class="lesson-step-check"></span>';
+  button.querySelector('.lesson-step-number').textContent=String(i+1).padStart(2,'0');
+  button.querySelector('strong').textContent=item.title;
+  button.querySelector('small').textContent=item.duration;
+  button.querySelector('.lesson-step-check').textContent=studyState.completed.has(i)?'✓':'';
+  button.addEventListener('click',()=>{studyState.lesson=i;renderLesson();});
+  document.querySelector('#lessonList').appendChild(button);
+ });
+ updateStudyProgress();
+}
+document.querySelector('#lessonPrev').addEventListener('click',()=>{
+ studyState.lesson=Math.max(0,studyState.lesson-1);renderLesson();
+});
+document.querySelector('#lessonNext').addEventListener('click',()=>{
+ studyState.lesson=(studyState.lesson+1)%studyLessons.length;renderLesson();
+});
+document.querySelector('#lessonComplete').addEventListener('click',()=>{
+ const i=studyState.lesson;
+ if(studyState.completed.has(i))studyState.completed.delete(i);else studyState.completed.add(i);
+ saveStudyProgress();renderLesson();
+});
+document.querySelector('#lessonFocus').addEventListener('click',()=>{
+ const lesson=studyLessons[studyState.lesson];
+ const entity=entities.find(e=>e.label===lesson.structure);
+ if(!entity){document.querySelector('#lessonStatus').textContent='This structure is described in the lesson but is not separately available in the current GLB.';return;}
+ document.querySelector('#stage').scrollIntoView({behavior:'smooth',block:'center'});
+ if(mode!=='anatomy')setMode('anatomy');
+ entities.forEach(e=>setEntityVisible(e,e===entity));
+ buildList();selectEntity(entity);focusEntity(entity);buildModelLabels();
+});
+function renderFlashcard(){
+ const card=studyFlashcards[studyState.card];
+ document.querySelector('#cardCounter').textContent='CARD '+String(studyState.card+1).padStart(2,'0')+' / '+String(studyFlashcards.length).padStart(2,'0');
+ document.querySelector('#flashcardCategory').textContent=card.category;
+ document.querySelector('#flashcardTerm').textContent=card.front;
+ document.querySelector('#flashcardAnswer').textContent=card.back;
+ document.querySelector('#flashcardAnswer').hidden=!studyState.cardRevealed;
+ document.querySelector('#flashcardHint').textContent=studyState.cardRevealed?'Answer revealed · Try to explain it in your own words':'Tap to reveal the answer';
+ document.querySelector('#flashcard').classList.toggle('revealed',studyState.cardRevealed);
+ document.querySelector('#cardReveal').textContent=studyState.cardRevealed?'Hide answer':'Reveal answer';
+}
+function revealCard(){
+ studyState.cardRevealed=!studyState.cardRevealed;
+ renderFlashcard();
+}
+document.querySelector('#flashcard').addEventListener('click',revealCard);
+document.querySelector('#cardReveal').addEventListener('click',revealCard);
+document.querySelector('#cardPrev').addEventListener('click',()=>{
+ studyState.card=(studyState.card-1+studyFlashcards.length)%studyFlashcards.length;studyState.cardRevealed=false;renderFlashcard();
+});
+document.querySelector('#cardNext').addEventListener('click',()=>{
+ studyState.card=(studyState.card+1)%studyFlashcards.length;studyState.cardRevealed=false;renderFlashcard();
+});
+function renderQuiz(){
+ studyState.answered=false;
+ const q=studyQuestions[studyState.quiz];
+ document.querySelector('#quizResult').hidden=true;
+ document.querySelector('#quizCounter').textContent='QUESTION '+(studyState.quiz+1)+' / '+studyQuestions.length;
+ document.querySelector('#quizProgressBar').style.width=(studyState.quiz/studyQuestions.length*100)+'%';
+ document.querySelector('#quizTopic').textContent=q.topic;
+ document.querySelector('#quizQuestion').textContent=q.q;
+ document.querySelector('#quizOptions').innerHTML='';
+ document.querySelector('#quizFeedback').hidden=true;
+ document.querySelector('#quizNext').disabled=true;
+ document.querySelector('#quizNext').textContent=studyState.quiz===studyQuestions.length-1?'See your result':'Next question →';
+ document.querySelector('#quizScoreLive').textContent='Score: '+studyState.score;
+ q.options.forEach((option,index)=>{
+  const button=document.createElement('button');
+  button.type='button';button.className='quiz-option';
+  button.innerHTML='<span class="option-letter"></span><span class="option-text"></span>';
+  button.querySelector('.option-letter').textContent=String.fromCharCode(65+index);
+  button.querySelector('.option-text').textContent=option;
+  button.addEventListener('click',()=>answerQuiz(index));
+  document.querySelector('#quizOptions').appendChild(button);
+ });
+}
+function answerQuiz(choice){
+ if(studyState.answered)return;
+ studyState.answered=true;
+ const q=studyQuestions[studyState.quiz];
+ const correct=choice===q.answer;
+ if(correct)studyState.score++;
+ document.querySelectorAll('.quiz-option').forEach((button,index)=>{
+  button.disabled=true;
+  if(index===q.answer)button.classList.add('correct');
+  else if(index===choice)button.classList.add('incorrect');
+ });
+ const feedback=document.querySelector('#quizFeedback');
+ feedback.hidden=false;feedback.className='quiz-feedback '+(correct?'correct':'incorrect');
+ const heading=document.createElement('strong');heading.textContent=correct?'Correct!':'Not quite.';
+ const explanation=document.createElement('p');explanation.textContent=q.why;
+ feedback.replaceChildren(heading,explanation);
+ document.querySelector('#quizScoreLive').textContent='Score: '+studyState.score;
+ document.querySelector('#quizProgressBar').style.width=((studyState.quiz+1)/studyQuestions.length*100)+'%';
+ document.querySelector('#quizNext').disabled=false;
+}
+document.querySelector('#quizNext').addEventListener('click',()=>{
+ if(!studyState.answered)return;
+ if(studyState.quiz<studyQuestions.length-1){
+  studyState.quiz++;renderQuiz();return;
+ }
+ const pct=Math.round(studyState.score/studyQuestions.length*100);
+ document.querySelector('#quizCard')?.setAttribute('hidden','');
+ document.querySelector('.quiz-card').hidden=true;
+ document.querySelector('#quizResult').hidden=false;
+ document.querySelector('#quizResultTitle').textContent=pct>=80?'Excellent work!':pct>=50?'Good effort—keep revising!':'Keep practising—you can improve!';
+ document.querySelector('#quizResultText').textContent='You scored '+studyState.score+' out of '+studyQuestions.length+' ('+pct+'%). Review the explanations, revisit the lessons and try again.';
+ document.querySelector('#quizCounter').textContent='COMPLETED';
+ document.querySelector('#quizProgressBar').style.width='100%';
+});
+document.querySelector('#quizRestart').addEventListener('click',()=>{
+ studyState.quiz=0;studyState.score=0;studyState.answered=false;
+ document.querySelector('.quiz-card').hidden=false;
+ renderQuiz();
+});
+function renderGlossary(query=''){
+ const list=document.querySelector('#glossaryList');list.innerHTML='';
+ const q=query.trim().toLowerCase();
+ const matches=studyGlossary.filter(([term,definition])=>(term+' '+definition).toLowerCase().includes(q));
+ document.querySelector('#glossaryCount').textContent=matches.length+' / '+studyGlossary.length+' TERMS';
+ document.querySelector('#glossaryEmpty').hidden=matches.length!==0;
+ matches.forEach(([term,definition])=>{
+  const item=document.createElement('article');item.className='glossary-item';
+  const title=document.createElement('h4');title.textContent=term;
+  const body=document.createElement('p');body.textContent=definition;
+  item.append(title,body);list.appendChild(item);
+ });
+}
+document.querySelector('#glossarySearch').addEventListener('input',e=>renderGlossary(e.target.value));
+renderLesson();
+renderFlashcard();
+renderQuiz();
+renderGlossary();
