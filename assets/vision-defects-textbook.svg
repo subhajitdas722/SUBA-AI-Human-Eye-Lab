@@ -1,185 +1,174 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1360" role="img" aria-labelledby="title desc">
-<title id="title">Defects of vision and their correction</title>
-<desc id="desc">Textbook-style reference showing myopia, hypermetropia, presbyopia and astigmatism, with diagrams before and after correction and the appropriate corrective lenses.</desc>
-<defs>
-  <style>
-    .page-title{font: bold 42px Georgia,serif;fill:#fff}.subtitle{font:18px Georgia,serif;fill:#25435c}
-    .panel-title{font:bold 25px Georgia,serif;fill:#fff}.body{font:17px Georgia,serif;fill:#243746}
-    .small{font:14px Georgia,serif;fill:#465b6b}.figure-title{font:bold 16px Georgia,serif;fill:#234b6b}
-    .tiny{font:11px Georgia,serif;fill:#304b5f}.ray{stroke:#d73535;stroke-width:3;fill:none;stroke-linecap:round;stroke-linejoin:round}
-    .blue-ray{stroke:#257dbb;stroke-width:3;fill:none;stroke-linecap:round;stroke-linejoin:round}
-    .goodfocus{fill:#159a75;stroke:#fff;stroke-width:2}.badfocus{fill:#d64e42;stroke:#fff;stroke-width:2}.bluefocus{fill:#2678b7;stroke:#fff;stroke-width:2}
-  </style>
-  <linearGradient id="header" x2="1" y2="1"><stop stop-color="#164f87"/><stop offset="1" stop-color="#0b2e5b"/></linearGradient>
-</defs>
-<rect width="1600" height="1360" fill="#fff"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1450" role="img" aria-labelledby="title desc">
+<title id="title">Defects of Vision and Their Correction</title>
+<desc id="desc">Four textbook-style diagrams comparing myopia, hypermetropia, presbyopia and astigmatism before and after correction.</desc>
+<defs><style>
+.page-title{font: bold 42px Georgia,serif;fill:#fff}.subtitle{font:18px Georgia,serif;fill:#25435c}
+.panel-title{font:bold 25px Georgia,serif;fill:#fff}.body{font:16px Georgia,serif;fill:#243746}
+.small{font:14px Georgia,serif;fill:#465b6b}.figure-title{font:bold 16px Georgia,serif;fill:#234b6b}
+.tiny{font:11px Georgia,serif;fill:#304b5f}.ray{stroke:#d73535;stroke-width:3;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.blue-ray{stroke:#257dbb;stroke-width:3;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.goodfocus{fill:#159a75;stroke:#fff;stroke-width:2}.badfocus{fill:#d64e42;stroke:#fff;stroke-width:2}.bluefocus{fill:#2678b7;stroke:#fff;stroke-width:2}
+</style><linearGradient id="header" x2="1" y2="1"><stop stop-color="#164f87"/><stop offset="1" stop-color="#0b2e5b"/></linearGradient></defs>
+<rect width="1600" height="1450" fill="#fff"/>
 <rect x="30" y="22" width="1540" height="82" rx="20" fill="url(#header)"/>
 <text x="800" y="76" text-anchor="middle" class="page-title">Defects of Vision and Their Correction</text>
-<text x="800" y="120" text-anchor="middle" class="subtitle">A textbook reference: image formation before and after optical correction</text>
-<g transform="translate(35,125)">
-    <rect width="740" height="560" rx="20" fill="#fffdf7" stroke="#3283b9" stroke-width="3"/>
+<text x="800" y="122" text-anchor="middle" class="subtitle">A textbook reference: image formation before and after optical correction</text>
+<g transform="translate(35,140)">
+    <rect width="740" height="610" rx="18" fill="#fffdf7" stroke="#15578f" stroke-width="3"/>
     <rect width="740" height="58" rx="18" fill="#15578f"/>
     <text x="26" y="39" class="panel-title">1. Myopia (short-sightedness)</text>
-    <text x="26" y="94" class="body"><tspan font-weight="bold">Defect: </tspan>Distant objects appear blurred, while nearby objects are seen more clearly.</text>
-    <text x="26" y="139" class="body"><tspan font-weight="bold">Cause: </tspan>The eye has excessive converging power or the eyeball is elongated; distant rays focus in front of the retina.</text>
-    <text x="26" y="187" class="body"><tspan font-weight="bold">Correction: </tspan>A concave (diverging) lens of suitable power.</text>
-    <text x="26" y="222" class="small">The concave lens diverges incoming parallel rays so the eye focuses them on the retina.</text>
-    <g transform="translate(15,270)">
+    <text x="26" y="94" class="body"><tspan font-weight="bold">Defect:</tspan> Distant objects appear blurred, while nearby objects are seen more clearly.</text>
+    <text x="26" y="151" class="body"><tspan font-weight="bold">Cause:</tspan> The eye has excessive converging power or the eyeball is elongated; distant</text><text x="26" y="173" class="body">rays focus in front of the retina.</text>
+    <text x="26" y="208" class="body"><tspan font-weight="bold">Correction:</tspan> A concave (diverging) lens of suitable power.</text>
+    <text x="26" y="273" class="small"><tspan x="26" dy="0">The concave lens diverges incoming parallel rays so the eye focuses them on the retina.</tspan></text>
+    <g transform="translate(15,330)">
       <rect width="345" height="260" rx="12" fill="#f5f8fb" stroke="#c7d8e5"/>
       <text x="172" y="28" text-anchor="middle" class="figure-title">(a) Without correction</text>
-      <svg x="2" y="25" width="340" height="230" viewBox="0 0 340 250">
-    <defs><radialGradient id="eyefill-myopia-false" cx="45%" cy="45%"><stop offset="0" stop-color="#ffe2b2"/><stop offset=".72" stop-color="#ffc68c"/><stop offset="1" stop-color="#ef9067"/></radialGradient></defs>
-    <text x="8" y="238" class="tiny">Parallel rays</text><path d="M8 108 L120 108 L166 126 L210 145" class="ray"/><path d="M8 182 L120 182 L166 164 L210 145" class="ray"/>
-    <path d="M120 145 C139 76 230 72 278 145 C230 218 139 214 120 145Z" fill="url(#eyefill-myopia-false)" stroke="#4e7894" stroke-width="3"/>
+      <svg x="2" y="8" width="340" height="245" viewBox="0 0 340 250" role="img" aria-label="myopia without correction">
+    <defs><radialGradient id="eye-myopia-false" cx="45%" cy="45%"><stop offset="0" stop-color="#ffe7bd"/><stop offset=".72" stop-color="#ffc88e"/><stop offset="1" stop-color="#ef9168"/></radialGradient></defs>
+    <text x="8" y="238" class="tiny">Distant object</text>
+    <path d="M120 145 C139 76 230 72 278 145 C230 218 139 214 120 145Z" fill="url(#eye-myopia-false)" stroke="#4e7894" stroke-width="3"/>
     <path d="M120 101 Q96 145 120 189" fill="#b8e8f6" fill-opacity=".75" stroke="#4f8eae" stroke-width="3"/>
     <path d="M149 110 Q174 145 149 180 Q125 145 149 110Z" fill="#9bd7ec" stroke="#377f9f" stroke-width="2.5"/>
     <path d="M255 104 Q278 145 255 186" fill="none" stroke="#b43f45" stroke-width="5"/>
     <path d="M270 145 L320 145" stroke="#e0a34d" stroke-width="9" stroke-linecap="round"/>
-    <circle cx="210" cy="145" r="6" class="badfocus"/><text x="210" y="80" class="tiny" text-anchor="middle">Focus before retina</text>
-    <text x="148" y="205" class="tiny" text-anchor="middle">Eye lens</text>
-    <text x="269" y="96" class="tiny" text-anchor="middle">Retina</text>
+    <path d="M8 108 L120 108 L166 126 L210 145" class="ray"/><path d="M8 182 L120 182 L166 164 L210 145" class="ray"/><circle cx="210" cy="145" r="6" class="badfocus"/><text x="210" y="77" text-anchor="middle" class="tiny">Focus in front</text>
+    <text x="149" y="205" class="tiny" text-anchor="middle">Eye lens</text><text x="269" y="96" class="tiny" text-anchor="middle">Retina</text>
   </svg>
     </g>
-    <g transform="translate(380,270)">
+    <g transform="translate(380,330)">
       <rect width="345" height="260" rx="12" fill="#f1faf7" stroke="#b8dacf"/>
       <text x="172" y="28" text-anchor="middle" class="figure-title">(b) With correction</text>
-      <svg x="2" y="25" width="340" height="230" viewBox="0 0 340 250">
-    <defs><radialGradient id="eyefill-myopia-true" cx="45%" cy="45%"><stop offset="0" stop-color="#ffe2b2"/><stop offset=".72" stop-color="#ffc68c"/><stop offset="1" stop-color="#ef9067"/></radialGradient></defs>
-    <text x="8" y="238" class="tiny">Parallel rays</text><path d="M58 95 Q76 145 58 195 L72 195 Q54 145 72 95 Z" fill="#b9e5f7" stroke="#2877b7" stroke-width="2"/><text x="65" y="218" text-anchor="middle" class="tiny">Concave lens</text><path d="M8 108 L58 108 L120 91 L166 120 L270 145" class="ray"/><path d="M8 182 L58 182 L120 199 L166 170 L270 145" class="ray"/>
-    <path d="M120 145 C139 76 230 72 278 145 C230 218 139 214 120 145Z" fill="url(#eyefill-myopia-true)" stroke="#4e7894" stroke-width="3"/>
+      <svg x="2" y="8" width="340" height="245" viewBox="0 0 340 250" role="img" aria-label="myopia with correction">
+    <defs><radialGradient id="eye-myopia-true" cx="45%" cy="45%"><stop offset="0" stop-color="#ffe7bd"/><stop offset=".72" stop-color="#ffc88e"/><stop offset="1" stop-color="#ef9168"/></radialGradient></defs>
+    <text x="8" y="238" class="tiny">Distant object</text><path d="M55 95 Q72 145 55 195 L69 195 Q56 145 69 95 Z" fill="#b9e5f7" stroke="#2877b7" stroke-width="2"/><text x="62" y="218" text-anchor="middle" class="tiny">Concave</text>
+    <path d="M120 145 C139 76 230 72 278 145 C230 218 139 214 120 145Z" fill="url(#eye-myopia-true)" stroke="#4e7894" stroke-width="3"/>
     <path d="M120 101 Q96 145 120 189" fill="#b8e8f6" fill-opacity=".75" stroke="#4f8eae" stroke-width="3"/>
     <path d="M149 110 Q174 145 149 180 Q125 145 149 110Z" fill="#9bd7ec" stroke="#377f9f" stroke-width="2.5"/>
     <path d="M255 104 Q278 145 255 186" fill="none" stroke="#b43f45" stroke-width="5"/>
     <path d="M270 145 L320 145" stroke="#e0a34d" stroke-width="9" stroke-linecap="round"/>
-    <circle cx="270" cy="145" r="6" class="goodfocus"/><text x="267" y="77" class="tiny" text-anchor="middle">Focus on retina</text>
-    <text x="148" y="205" class="tiny" text-anchor="middle">Eye lens</text>
-    <text x="269" y="96" class="tiny" text-anchor="middle">Retina</text>
+    <path d="M8 108 L55 108 L120 91 L166 120 L270 145" class="ray"/><path d="M8 182 L55 182 L120 199 L166 170 L270 145" class="ray"/><circle cx="270" cy="145" r="6" class="goodfocus"/><text x="270" y="77" text-anchor="middle" class="tiny">Focus on retina</text>
+    <text x="149" y="205" class="tiny" text-anchor="middle">Eye lens</text><text x="269" y="96" class="tiny" text-anchor="middle">Retina</text>
   </svg>
     </g>
   </g>
-<g transform="translate(825,125)">
-    <rect width="740" height="560" rx="20" fill="#fffdf7" stroke="#7754a5" stroke-width="3"/>
+<g transform="translate(825,140)">
+    <rect width="740" height="610" rx="18" fill="#fffdf7" stroke="#573580" stroke-width="3"/>
     <rect width="740" height="58" rx="18" fill="#573580"/>
     <text x="26" y="39" class="panel-title">2. Hypermetropia (long-sightedness)</text>
-    <text x="26" y="94" class="body"><tspan font-weight="bold">Defect: </tspan>Near objects appear blurred; distant vision may be clearer.</text>
-    <text x="26" y="139" class="body"><tspan font-weight="bold">Cause: </tspan>The eye has insufficient converging power or the eyeball is shorter; near rays would focus behind the retina.</text>
-    <text x="26" y="187" class="body"><tspan font-weight="bold">Correction: </tspan>A convex (converging) lens of suitable power.</text>
-    <text x="26" y="222" class="small">The convex lens converges the rays before they enter the eye, helping form the image on the retina.</text>
-    <g transform="translate(15,270)">
+    <text x="26" y="94" class="body"><tspan font-weight="bold">Defect:</tspan> Near objects appear blurred; distant vision may be clearer.</text>
+    <text x="26" y="151" class="body"><tspan font-weight="bold">Cause:</tspan> The eye has insufficient converging power or the eyeball is shorter; near</text><text x="26" y="173" class="body">rays would focus behind the retina.</text>
+    <text x="26" y="208" class="body"><tspan font-weight="bold">Correction:</tspan> A convex (converging) lens of suitable power.</text>
+    <text x="26" y="273" class="small"><tspan x="26" dy="0">The convex lens converges light before it enters the eye, helping form the image on the retina.</tspan></text>
+    <g transform="translate(15,330)">
       <rect width="345" height="260" rx="12" fill="#f5f8fb" stroke="#c7d8e5"/>
       <text x="172" y="28" text-anchor="middle" class="figure-title">(a) Without correction</text>
-      <svg x="2" y="25" width="340" height="230" viewBox="0 0 340 250">
-    <defs><radialGradient id="eyefill-hypermetropia-false" cx="45%" cy="45%"><stop offset="0" stop-color="#ffe2b2"/><stop offset=".72" stop-color="#ffc68c"/><stop offset="1" stop-color="#ef9067"/></radialGradient></defs>
-    <circle cx="10" cy="145" r="4" fill="#a94b25"/><text x="10" y="238" text-anchor="middle" class="tiny">Near object</text><path d="M8 145 L120 112 L166 124 L310 145" class="ray"/><path d="M8 145 L120 178 L166 166 L310 145" class="ray"/>
-    <path d="M120 145 C139 76 230 72 278 145 C230 218 139 214 120 145Z" fill="url(#eyefill-hypermetropia-false)" stroke="#4e7894" stroke-width="3"/>
+      <svg x="2" y="8" width="340" height="245" viewBox="0 0 340 250" role="img" aria-label="hypermetropia without correction">
+    <defs><radialGradient id="eye-hypermetropia-false" cx="45%" cy="45%"><stop offset="0" stop-color="#ffe7bd"/><stop offset=".72" stop-color="#ffc88e"/><stop offset="1" stop-color="#ef9168"/></radialGradient></defs>
+    <circle cx="9" cy="145" r="4" fill="#a94b25"/><text x="8" y="238" class="tiny">Near object</text>
+    <path d="M120 145 C139 76 230 72 278 145 C230 218 139 214 120 145Z" fill="url(#eye-hypermetropia-false)" stroke="#4e7894" stroke-width="3"/>
     <path d="M120 101 Q96 145 120 189" fill="#b8e8f6" fill-opacity=".75" stroke="#4f8eae" stroke-width="3"/>
     <path d="M149 110 Q174 145 149 180 Q125 145 149 110Z" fill="#9bd7ec" stroke="#377f9f" stroke-width="2.5"/>
     <path d="M255 104 Q278 145 255 186" fill="none" stroke="#b43f45" stroke-width="5"/>
     <path d="M270 145 L320 145" stroke="#e0a34d" stroke-width="9" stroke-linecap="round"/>
-    <circle cx="310" cy="145" r="6" class="badfocus"/><text x="304" y="80" class="tiny" text-anchor="middle">Focus behind retina</text>
-    <text x="148" y="205" class="tiny" text-anchor="middle">Eye lens</text>
-    <text x="269" y="96" class="tiny" text-anchor="middle">Retina</text>
+    <path d="M8 145 L120 112 L166 124 L310 145" class="ray"/><path d="M8 145 L120 178 L166 166 L310 145" class="ray"/><circle cx="310" cy="145" r="6" class="badfocus"/><text x="303" y="77" text-anchor="middle" class="tiny">Focus behind retina</text>
+    <text x="149" y="205" class="tiny" text-anchor="middle">Eye lens</text><text x="269" y="96" class="tiny" text-anchor="middle">Retina</text>
   </svg>
     </g>
-    <g transform="translate(380,270)">
+    <g transform="translate(380,330)">
       <rect width="345" height="260" rx="12" fill="#f1faf7" stroke="#b8dacf"/>
       <text x="172" y="28" text-anchor="middle" class="figure-title">(b) With correction</text>
-      <svg x="2" y="25" width="340" height="230" viewBox="0 0 340 250">
-    <defs><radialGradient id="eyefill-hypermetropia-true" cx="45%" cy="45%"><stop offset="0" stop-color="#ffe2b2"/><stop offset=".72" stop-color="#ffc68c"/><stop offset="1" stop-color="#ef9067"/></radialGradient></defs>
-    <circle cx="10" cy="145" r="4" fill="#a94b25"/><text x="10" y="238" text-anchor="middle" class="tiny">Near object</text><path d="M68 95 Q98 145 68 195 Q38 145 68 95 Z" fill="#b9e5f7" stroke="#2877b7" stroke-width="2"/><text x="68" y="218" text-anchor="middle" class="tiny">Convex lens</text><path d="M8 145 L58 145 L120 111 L166 124 L270 145" class="ray"/><path d="M8 145 L58 145 L120 179 L166 166 L270 145" class="ray"/>
-    <path d="M120 145 C139 76 230 72 278 145 C230 218 139 214 120 145Z" fill="url(#eyefill-hypermetropia-true)" stroke="#4e7894" stroke-width="3"/>
+      <svg x="2" y="8" width="340" height="245" viewBox="0 0 340 250" role="img" aria-label="hypermetropia with correction">
+    <defs><radialGradient id="eye-hypermetropia-true" cx="45%" cy="45%"><stop offset="0" stop-color="#ffe7bd"/><stop offset=".72" stop-color="#ffc88e"/><stop offset="1" stop-color="#ef9168"/></radialGradient></defs>
+    <circle cx="9" cy="145" r="4" fill="#a94b25"/><text x="8" y="238" class="tiny">Near object</text><path d="M66 95 Q96 145 66 195 Q36 145 66 95Z" fill="#b9e5f7" stroke="#2877b7" stroke-width="2"/><text x="66" y="218" text-anchor="middle" class="tiny">Convex</text>
+    <path d="M120 145 C139 76 230 72 278 145 C230 218 139 214 120 145Z" fill="url(#eye-hypermetropia-true)" stroke="#4e7894" stroke-width="3"/>
     <path d="M120 101 Q96 145 120 189" fill="#b8e8f6" fill-opacity=".75" stroke="#4f8eae" stroke-width="3"/>
     <path d="M149 110 Q174 145 149 180 Q125 145 149 110Z" fill="#9bd7ec" stroke="#377f9f" stroke-width="2.5"/>
     <path d="M255 104 Q278 145 255 186" fill="none" stroke="#b43f45" stroke-width="5"/>
     <path d="M270 145 L320 145" stroke="#e0a34d" stroke-width="9" stroke-linecap="round"/>
-    <circle cx="270" cy="145" r="6" class="goodfocus"/><text x="267" y="77" class="tiny" text-anchor="middle">Focus on retina</text>
-    <text x="148" y="205" class="tiny" text-anchor="middle">Eye lens</text>
-    <text x="269" y="96" class="tiny" text-anchor="middle">Retina</text>
+    <path d="M8 145 L66 145 L120 111 L166 124 L270 145" class="ray"/><path d="M8 145 L66 145 L120 179 L166 166 L270 145" class="ray"/><circle cx="270" cy="145" r="6" class="goodfocus"/><text x="270" y="77" text-anchor="middle" class="tiny">Focus on retina</text>
+    <text x="149" y="205" class="tiny" text-anchor="middle">Eye lens</text><text x="269" y="96" class="tiny" text-anchor="middle">Retina</text>
   </svg>
     </g>
   </g>
-<g transform="translate(35,740)">
-    <rect width="740" height="560" rx="20" fill="#fffdf7" stroke="#bd4d83" stroke-width="3"/>
+<g transform="translate(35,770)">
+    <rect width="740" height="610" rx="18" fill="#fffdf7" stroke="#a82e69" stroke-width="3"/>
     <rect width="740" height="58" rx="18" fill="#a82e69"/>
     <text x="26" y="39" class="panel-title">3. Presbyopia</text>
-    <text x="26" y="94" class="body"><tspan font-weight="bold">Defect: </tspan>The near point moves farther away with age, making close work difficult.</text>
-    <text x="26" y="139" class="body"><tspan font-weight="bold">Cause: </tspan>Age-related loss of accommodation, mainly due to reduced flexibility of the crystalline lens.</text>
-    <text x="26" y="187" class="body"><tspan font-weight="bold">Correction: </tspan>A convex near-add lens; bifocal or progressive lenses may be used when needed.</text>
-    <text x="26" y="222" class="small">The added converging power helps focus light from near objects on the retina.</text>
-    <g transform="translate(15,270)">
+    <text x="26" y="94" class="body"><tspan font-weight="bold">Defect:</tspan> The near point moves farther away with age, making close work difficult.</text>
+    <text x="26" y="151" class="body"><tspan font-weight="bold">Cause:</tspan> Age-related loss of accommodation, mainly due to reduced flexibility of the</text><text x="26" y="173" class="body">crystalline lens.</text>
+    <text x="26" y="208" class="body"><tspan font-weight="bold">Correction:</tspan> A convex near-add lens; bifocal or progressive lenses may be used when</text><text x="26" y="230" class="body">needed.</text>
+    <text x="26" y="273" class="small"><tspan x="26" dy="0">The added converging power helps focus light from near objects on the retina.</tspan></text>
+    <g transform="translate(15,330)">
       <rect width="345" height="260" rx="12" fill="#f5f8fb" stroke="#c7d8e5"/>
       <text x="172" y="28" text-anchor="middle" class="figure-title">(a) Without correction</text>
-      <svg x="2" y="25" width="340" height="230" viewBox="0 0 340 250">
-    <defs><radialGradient id="eyefill-presbyopia-false" cx="45%" cy="45%"><stop offset="0" stop-color="#ffe2b2"/><stop offset=".72" stop-color="#ffc68c"/><stop offset="1" stop-color="#ef9067"/></radialGradient></defs>
-    <circle cx="10" cy="145" r="4" fill="#a94b25"/><text x="10" y="238" text-anchor="middle" class="tiny">Near object</text><path d="M8 145 L120 112 L166 124 L310 145" class="ray"/><path d="M8 145 L120 178 L166 166 L310 145" class="ray"/>
-    <path d="M120 145 C139 76 230 72 278 145 C230 218 139 214 120 145Z" fill="url(#eyefill-presbyopia-false)" stroke="#4e7894" stroke-width="3"/>
+      <svg x="2" y="8" width="340" height="245" viewBox="0 0 340 250" role="img" aria-label="presbyopia without correction">
+    <defs><radialGradient id="eye-presbyopia-false" cx="45%" cy="45%"><stop offset="0" stop-color="#ffe7bd"/><stop offset=".72" stop-color="#ffc88e"/><stop offset="1" stop-color="#ef9168"/></radialGradient></defs>
+    <circle cx="9" cy="145" r="4" fill="#a94b25"/><text x="8" y="238" class="tiny">Near object</text>
+    <path d="M120 145 C139 76 230 72 278 145 C230 218 139 214 120 145Z" fill="url(#eye-presbyopia-false)" stroke="#4e7894" stroke-width="3"/>
     <path d="M120 101 Q96 145 120 189" fill="#b8e8f6" fill-opacity=".75" stroke="#4f8eae" stroke-width="3"/>
     <path d="M149 110 Q174 145 149 180 Q125 145 149 110Z" fill="#9bd7ec" stroke="#377f9f" stroke-width="2.5"/>
     <path d="M255 104 Q278 145 255 186" fill="none" stroke="#b43f45" stroke-width="5"/>
     <path d="M270 145 L320 145" stroke="#e0a34d" stroke-width="9" stroke-linecap="round"/>
-    <circle cx="310" cy="145" r="6" class="badfocus"/><text x="304" y="80" class="tiny" text-anchor="middle">Focus behind retina</text>
-    <text x="148" y="205" class="tiny" text-anchor="middle">Eye lens</text>
-    <text x="269" y="96" class="tiny" text-anchor="middle">Retina</text>
+    <path d="M8 145 L120 112 L166 124 L310 145" class="ray"/><path d="M8 145 L120 178 L166 166 L310 145" class="ray"/><circle cx="310" cy="145" r="6" class="badfocus"/><text x="303" y="77" text-anchor="middle" class="tiny">Focus behind retina</text>
+    <text x="149" y="205" class="tiny" text-anchor="middle">Eye lens</text><text x="269" y="96" class="tiny" text-anchor="middle">Retina</text>
   </svg>
     </g>
-    <g transform="translate(380,270)">
+    <g transform="translate(380,330)">
       <rect width="345" height="260" rx="12" fill="#f1faf7" stroke="#b8dacf"/>
       <text x="172" y="28" text-anchor="middle" class="figure-title">(b) With correction</text>
-      <svg x="2" y="25" width="340" height="230" viewBox="0 0 340 250">
-    <defs><radialGradient id="eyefill-presbyopia-true" cx="45%" cy="45%"><stop offset="0" stop-color="#ffe2b2"/><stop offset=".72" stop-color="#ffc68c"/><stop offset="1" stop-color="#ef9067"/></radialGradient></defs>
-    <circle cx="10" cy="145" r="4" fill="#a94b25"/><text x="10" y="238" text-anchor="middle" class="tiny">Near object</text><path d="M68 95 Q98 145 68 195 Q38 145 68 95 Z" fill="#b9e5f7" stroke="#2877b7" stroke-width="2"/><text x="68" y="218" text-anchor="middle" class="tiny">Reading lens</text><path d="M8 145 L58 145 L120 111 L166 124 L270 145" class="ray"/><path d="M8 145 L58 145 L120 179 L166 166 L270 145" class="ray"/>
-    <path d="M120 145 C139 76 230 72 278 145 C230 218 139 214 120 145Z" fill="url(#eyefill-presbyopia-true)" stroke="#4e7894" stroke-width="3"/>
+      <svg x="2" y="8" width="340" height="245" viewBox="0 0 340 250" role="img" aria-label="presbyopia with correction">
+    <defs><radialGradient id="eye-presbyopia-true" cx="45%" cy="45%"><stop offset="0" stop-color="#ffe7bd"/><stop offset=".72" stop-color="#ffc88e"/><stop offset="1" stop-color="#ef9168"/></radialGradient></defs>
+    <circle cx="9" cy="145" r="4" fill="#a94b25"/><text x="8" y="238" class="tiny">Near object</text><path d="M66 95 Q96 145 66 195 Q36 145 66 95Z" fill="#b9e5f7" stroke="#2877b7" stroke-width="2"/><text x="66" y="218" text-anchor="middle" class="tiny">Reading add</text>
+    <path d="M120 145 C139 76 230 72 278 145 C230 218 139 214 120 145Z" fill="url(#eye-presbyopia-true)" stroke="#4e7894" stroke-width="3"/>
     <path d="M120 101 Q96 145 120 189" fill="#b8e8f6" fill-opacity=".75" stroke="#4f8eae" stroke-width="3"/>
     <path d="M149 110 Q174 145 149 180 Q125 145 149 110Z" fill="#9bd7ec" stroke="#377f9f" stroke-width="2.5"/>
     <path d="M255 104 Q278 145 255 186" fill="none" stroke="#b43f45" stroke-width="5"/>
     <path d="M270 145 L320 145" stroke="#e0a34d" stroke-width="9" stroke-linecap="round"/>
-    <circle cx="270" cy="145" r="6" class="goodfocus"/><text x="267" y="77" class="tiny" text-anchor="middle">Focus on retina</text>
-    <text x="148" y="205" class="tiny" text-anchor="middle">Eye lens</text>
-    <text x="269" y="96" class="tiny" text-anchor="middle">Retina</text>
+    <path d="M8 145 L66 145 L120 111 L166 124 L270 145" class="ray"/><path d="M8 145 L66 145 L120 179 L166 166 L270 145" class="ray"/><circle cx="270" cy="145" r="6" class="goodfocus"/><text x="270" y="77" text-anchor="middle" class="tiny">Focus on retina</text>
+    <text x="149" y="205" class="tiny" text-anchor="middle">Eye lens</text><text x="269" y="96" class="tiny" text-anchor="middle">Retina</text>
   </svg>
     </g>
   </g>
-<g transform="translate(825,740)">
-    <rect width="740" height="560" rx="20" fill="#fffdf7" stroke="#258a75" stroke-width="3"/>
+<g transform="translate(825,770)">
+    <rect width="740" height="610" rx="18" fill="#fffdf7" stroke="#08745f" stroke-width="3"/>
     <rect width="740" height="58" rx="18" fill="#08745f"/>
     <text x="26" y="39" class="panel-title">4. Astigmatism</text>
-    <text x="26" y="94" class="body"><tspan font-weight="bold">Defect: </tspan>Vision may be blurred or distorted because two principal meridians do not share one focus.</text>
-    <text x="26" y="139" class="body"><tspan font-weight="bold">Cause: </tspan>The cornea, or sometimes the lens, has unequal curvature and refractive power in different meridians.</text>
-    <text x="26" y="187" class="body"><tspan font-weight="bold">Correction: </tspan>A cylindrical or toric lens, selected for the individual eye.</text>
-    <text x="26" y="222" class="small">The lens compensates for unequal meridional power so the two focal lines are brought together appropriately.</text>
-    <g transform="translate(15,270)">
+    <text x="26" y="94" class="body"><tspan font-weight="bold">Defect:</tspan> Vision may be blurred or distorted because two principal meridians do not</text><text x="26" y="116" class="body">share one focus.</text>
+    <text x="26" y="151" class="body"><tspan font-weight="bold">Cause:</tspan> The cornea, or sometimes the lens, has unequal curvature and refractive</text><text x="26" y="173" class="body">power in different meridians.</text>
+    <text x="26" y="208" class="body"><tspan font-weight="bold">Correction:</tspan> A cylindrical or toric lens, selected for the individual eye.</text>
+    <text x="26" y="273" class="small"><tspan x="26" dy="0">The correction compensates for unequal meridional power so the focal lines are brought together</tspan><tspan x="26" dy="18">appropriately.</tspan></text>
+    <g transform="translate(15,330)">
       <rect width="345" height="260" rx="12" fill="#f5f8fb" stroke="#c7d8e5"/>
       <text x="172" y="28" text-anchor="middle" class="figure-title">(a) Without correction</text>
-      <svg x="2" y="25" width="340" height="230" viewBox="0 0 340 250">
-    <defs><radialGradient id="eyefill-astigmatism-false" cx="45%" cy="45%"><stop offset="0" stop-color="#ffe2b2"/><stop offset=".72" stop-color="#ffc68c"/><stop offset="1" stop-color="#ef9067"/></radialGradient></defs>
-    <text x="8" y="238" class="tiny">Parallel rays</text><path d="M8 108 L120 108 L166 124 L218 145" class="ray"/><path d="M8 182 L120 182 L166 166 L312 145" class="ray blue-ray"/>
-    <path d="M120 145 C139 76 230 72 278 145 C230 218 139 214 120 145Z" fill="url(#eyefill-astigmatism-false)" stroke="#4e7894" stroke-width="3"/>
+      <svg x="2" y="8" width="340" height="245" viewBox="0 0 340 250" role="img" aria-label="astigmatism without correction">
+    <defs><radialGradient id="eye-astigmatism-false" cx="45%" cy="45%"><stop offset="0" stop-color="#ffe7bd"/><stop offset=".72" stop-color="#ffc88e"/><stop offset="1" stop-color="#ef9168"/></radialGradient></defs>
+    <text x="8" y="238" class="tiny">Parallel rays in two meridians</text>
+    <path d="M120 145 C139 76 230 72 278 145 C230 218 139 214 120 145Z" fill="url(#eye-astigmatism-false)" stroke="#4e7894" stroke-width="3"/>
     <path d="M120 101 Q96 145 120 189" fill="#b8e8f6" fill-opacity=".75" stroke="#4f8eae" stroke-width="3"/>
     <path d="M149 110 Q174 145 149 180 Q125 145 149 110Z" fill="#9bd7ec" stroke="#377f9f" stroke-width="2.5"/>
     <path d="M255 104 Q278 145 255 186" fill="none" stroke="#b43f45" stroke-width="5"/>
     <path d="M270 145 L320 145" stroke="#e0a34d" stroke-width="9" stroke-linecap="round"/>
-    <circle cx="218" cy="145" r="6" class="badfocus"/><circle cx="312" cy="145" r="6" class="bluefocus"/><text x="218" y="80" class="tiny" text-anchor="middle">Focal line 1</text><text x="302" y="98" class="tiny" text-anchor="middle">Focal line 2</text>
-    <text x="148" y="205" class="tiny" text-anchor="middle">Eye lens</text>
-    <text x="269" y="96" class="tiny" text-anchor="middle">Retina</text>
+    <path d="M8 108 L120 108 L166 124 L218 145" class="ray"/><path d="M8 182 L120 182 L166 166 L312 145" class="blue-ray"/><circle cx="218" cy="145" r="6" class="badfocus"/><circle cx="312" cy="145" r="6" class="bluefocus"/><text x="218" y="77" text-anchor="middle" class="tiny">Focal line 1</text><text x="303" y="98" text-anchor="middle" class="tiny">Focal line 2</text>
+    <text x="149" y="205" class="tiny" text-anchor="middle">Eye lens</text><text x="269" y="96" class="tiny" text-anchor="middle">Retina</text>
   </svg>
     </g>
-    <g transform="translate(380,270)">
+    <g transform="translate(380,330)">
       <rect width="345" height="260" rx="12" fill="#f1faf7" stroke="#b8dacf"/>
       <text x="172" y="28" text-anchor="middle" class="figure-title">(b) With correction</text>
-      <svg x="2" y="25" width="340" height="230" viewBox="0 0 340 250">
-    <defs><radialGradient id="eyefill-astigmatism-true" cx="45%" cy="45%"><stop offset="0" stop-color="#ffe2b2"/><stop offset=".72" stop-color="#ffc68c"/><stop offset="1" stop-color="#ef9067"/></radialGradient></defs>
-    <text x="8" y="238" class="tiny">Parallel rays</text><path d="M60 95 Q85 145 60 195 Q48 145 60 95 Z" fill="#b9e5f7" stroke="#2877b7" stroke-width="2"/><text x="66" y="218" text-anchor="middle" class="tiny">Toric lens</text><path d="M8 108 L60 108 L120 105 L166 120 L270 145" class="ray"/><path d="M8 182 L60 182 L120 185 L166 170 L270 145" class="ray blue-ray"/>
-    <path d="M120 145 C139 76 230 72 278 145 C230 218 139 214 120 145Z" fill="url(#eyefill-astigmatism-true)" stroke="#4e7894" stroke-width="3"/>
+      <svg x="2" y="8" width="340" height="245" viewBox="0 0 340 250" role="img" aria-label="astigmatism with correction">
+    <defs><radialGradient id="eye-astigmatism-true" cx="45%" cy="45%"><stop offset="0" stop-color="#ffe7bd"/><stop offset=".72" stop-color="#ffc88e"/><stop offset="1" stop-color="#ef9168"/></radialGradient></defs>
+    <text x="8" y="238" class="tiny">Parallel rays in two meridians</text><path d="M58 95 Q81 145 58 195 Q46 145 58 95Z" fill="#b9e5f7" stroke="#2877b7" stroke-width="2"/><text x="62" y="218" text-anchor="middle" class="tiny">Toric</text>
+    <path d="M120 145 C139 76 230 72 278 145 C230 218 139 214 120 145Z" fill="url(#eye-astigmatism-true)" stroke="#4e7894" stroke-width="3"/>
     <path d="M120 101 Q96 145 120 189" fill="#b8e8f6" fill-opacity=".75" stroke="#4f8eae" stroke-width="3"/>
     <path d="M149 110 Q174 145 149 180 Q125 145 149 110Z" fill="#9bd7ec" stroke="#377f9f" stroke-width="2.5"/>
     <path d="M255 104 Q278 145 255 186" fill="none" stroke="#b43f45" stroke-width="5"/>
     <path d="M270 145 L320 145" stroke="#e0a34d" stroke-width="9" stroke-linecap="round"/>
-    <circle cx="270" cy="145" r="6" class="goodfocus"/><text x="267" y="77" class="tiny" text-anchor="middle">Common retinal focus</text>
-    <text x="148" y="205" class="tiny" text-anchor="middle">Eye lens</text>
-    <text x="269" y="96" class="tiny" text-anchor="middle">Retina</text>
+    <path d="M8 108 L58 108 L120 105 L166 120 L270 145" class="ray"/><path d="M8 182 L58 182 L120 185 L166 170 L270 145" class="blue-ray"/><circle cx="270" cy="145" r="6" class="goodfocus"/><text x="270" y="77" text-anchor="middle" class="tiny">Common retinal focus</text>
+    <text x="149" y="205" class="tiny" text-anchor="middle">Eye lens</text><text x="269" y="96" class="tiny" text-anchor="middle">Retina</text>
   </svg>
     </g>
   </g>
-<rect x="35" y="1320" width="1530" height="28" rx="7" fill="#f4f0df"/>
-<text x="800" y="1340" text-anchor="middle" class="small">Teaching diagrams are schematic and not to scale. Corrective lens power and axis must be determined by an eye examination.</text>
+<rect x="35" y="1400" width="1530" height="34" rx="7" fill="#f4f0df"/>
+<text x="800" y="1422" text-anchor="middle" class="small">Teaching diagrams are schematic and not to scale. Corrective lens power and axis must be determined by an eye examination.</text>
 </svg>
