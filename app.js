@@ -807,3 +807,190 @@ renderLesson();
 renderFlashcard();
 renderQuiz();
 renderGlossary();
+
+
+/* ================= VISION DEFECTS & CORRECTION LAB ================= */
+const visionDefects={
+ myopia:{
+  category:'REFRACTIVE ERROR',
+  name:'Myopia (short-sightedness)',
+  summary:'Distant objects appear blurred because, for a relaxed eye, parallel rays from a distant object focus in front of the retina.',
+  imagePosition:'In front of the retina',
+  correction:'Concave (diverging) lens',
+  opticalEffect:'Diverges incoming parallel rays before they enter the eye',
+  why:'A concave lens makes the incoming rays diverge slightly. The eye lens then converges them so the final image forms on the retina instead of in front of it.',
+  memory:'MYOPIA → CONCAVE lens. Think: the eye focuses distant light too soon; a diverging lens reduces the net convergence.',
+  question:'Which lens is commonly used to correct myopia?',
+  answers:['Convex lens','Concave lens','Cylindrical lens only','Plane glass'],
+  correct:1,
+  feedback:'A concave (diverging) lens spreads the incoming rays before they enter a myopic eye, moving the final focus back onto the retina.',
+  diagramTitle:'Myopia — parallel rays focus before the retina'
+ },
+ hypermetropia:{
+  category:'REFRACTIVE ERROR',
+  name:'Hypermetropia (long-sightedness)',
+  summary:'Nearby objects may appear blurred because the eye’s optical power is insufficient, or the eyeball is relatively short, so the image would form behind the retina.',
+  imagePosition:'Behind the retina',
+  correction:'Convex (converging) lens',
+  opticalEffect:'Converges incoming rays before they enter the eye',
+  why:'A convex lens adds convergence to the light before it enters the eye. The eye then brings the image forward so it forms on the retina.',
+  memory:'HYPERMETROPIA → CONVEX lens. The unaided eye would focus behind the retina; a converging lens helps bring the focus forward.',
+  question:'Which lens is commonly used to correct hypermetropia?',
+  answers:['Concave lens','Convex lens','Plane mirror','No lens can help'],
+  correct:1,
+  feedback:'A convex (converging) lens adds optical power and helps focus light on the retina.',
+  diagramTitle:'Hypermetropia — rays would focus behind the retina'
+ },
+ presbyopia:{
+  category:'AGE-RELATED ACCOMMODATION CHANGE',
+  name:'Presbyopia',
+  summary:'With age, the eye’s ability to accommodate decreases. The near point moves farther away, making close objects difficult to focus on.',
+  imagePosition:'Near-object focus may fall behind the retina',
+  correction:'Convex near-add lens; bifocal or progressive lenses when needed',
+  opticalEffect:'Adds convergence for near viewing',
+  why:'A convex reading lens supplies some of the converging power that the ageing eye can no longer provide through accommodation. People who also need distance correction may use bifocal or progressive lenses.',
+  memory:'PRESBYOPIA → reduced accommodation. It is age-related and is not simply the same condition as hypermetropia.',
+  question:'What is the main change associated with presbyopia?',
+  answers:['The eye loses all colour vision','Accommodation becomes less effective','The pupil becomes permanently closed','The retina moves forward'],
+  correct:1,
+  feedback:'Presbyopia is mainly a reduction in the ability to accommodate, commonly associated with increasing stiffness of the crystalline lens.',
+  diagramTitle:'Presbyopia — a near object is not focused adequately'
+ },
+ astigmatism:{
+  category:'REFRACTIVE ERROR',
+  name:'Astigmatism',
+  summary:'The cornea or lens has different curvature in different meridians. Light is therefore not brought to one sharp point on the retina.',
+  imagePosition:'Different meridians focus at different positions',
+  correction:'Cylindrical or toric lens',
+  opticalEffect:'Corrects unequal refractive power in different meridians',
+  why:'A cylindrical or toric lens provides different optical power in different directions. This compensates for the unequal curvature and helps the meridians focus together on the retina.',
+  memory:'ASTIGMATISM → CYLINDRICAL / TORIC correction. The axis and power depend on the individual eye examination.',
+  question:'Which type of lens is commonly used to correct regular astigmatism?',
+  answers:['Concave spherical lens only','Convex spherical lens only','Cylindrical or toric lens','A plane glass plate'],
+  correct:2,
+  feedback:'A cylindrical or toric lens is designed to correct unequal refractive power in different meridians.',
+  diagramTitle:'Astigmatism — two principal meridians do not share one focus'
+ }
+};
+let activeDefect='myopia';
+let rayMode='uncorrected';
+function rayPath(points){
+ return points.map((p,i)=>(i?'L':'M')+' '+p[0]+' '+p[1]).join(' ');
+}
+function lensMarkup(x,type,label){
+ let path;
+ if(type==='concave')path='M '+x+' 102 Q '+(x-17)+' 170 '+x+' 238 Q '+(x+17)+' 170 '+x+' 102 Z';
+ else path='M '+x+' 102 Q '+(x+17)+' 170 '+x+' 238 Q '+(x-17)+' 170 '+x+' 102 Z';
+ return '<path class="'+(type==='none'?'eye-lens':'correction-lens')+'" d="'+path+'"/><text x="'+x+'" y="260" text-anchor="middle" class="small-label">'+label+'</text>';
+}
+function eyeMarkup(){
+ return '<path class="eye-shell" d="M 338 170 C 370 84 500 67 585 170 C 500 273 370 256 338 170 Z"/>'+
+  '<path class="eye-lens" d="M 392 118 Q 425 170 392 222 Q 359 170 392 118 Z"/>'+
+  '<text x="392" y="92" text-anchor="middle" class="small-label">EYE LENS</text>'+
+  '<line class="retina" x1="566" y1="105" x2="566" y2="235"/>'+
+  '<text x="566" y="258" text-anchor="middle" class="small-label">RETINA</text>';
+}
+function makeDiagramSvg(defect,corrected){
+ const commonStart='<defs><marker id="rayArrowGold" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#f5c968"/></marker><marker id="rayArrowTeal" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#5fe0ce"/></marker></defs>'+
+  '<line class="axis" x1="24" y1="170" x2="710" y2="170"/>'+
+  '<text x="28" y="24" class="small-label">'+(defect==='presbyopia'?'NEAR OBJECT':'DISTANT OBJECT')+'</text>'+
+  '<path class="object-mark" d="M 42 170 L 42 104 M 34 114 L 42 104 L 50 114"/>'+
+  '<text x="42" y="270" text-anchor="middle" class="small-label">OBJECT</text>'+
+  '<text x="210" y="78" text-anchor="middle" class="small-label">'+(corrected?'CORRECTIVE LENS':'NO CORRECTION')+'</text>'+
+  eyeMarkup();
+ let paths='',focus='',corrective='';
+ if(defect==='myopia'){
+  if(corrected){
+   corrective=lensMarkup(210,'concave','CONCAVE');
+   paths='<path class="ray-in" d="'+rayPath([[42,112],[210,112]])+'"/><path class="ray-out" d="'+rayPath([[210,112],[338,92],[392,112],[566,170]])+'"/>'+
+    '<path class="ray-in" d="'+rayPath([[42,228],[210,228]])+'"/><path class="ray-out" d="'+rayPath([[210,228],[338,248],[392,228],[566,170]])+'"/>';
+   focus='<circle class="focus-good" cx="566" cy="170" r="6"/><text x="575" y="157" class="small-label">FOCUS ON RETINA</text>';
+  }else{
+   paths='<path class="ray-in" d="'+rayPath([[42,112],[392,132]])+'"/><path class="ray-bad" d="'+rayPath([[392,132],[480,170],[566,196]])+'"/>'+
+    '<path class="ray-in" d="'+rayPath([[42,228],[392,208]])+'"/><path class="ray-bad" d="'+rayPath([[392,208],[480,170],[566,144]])+'"/>';
+   focus='<circle class="focus-point" cx="480" cy="170" r="6"/><text x="480" y="150" text-anchor="middle" class="small-label">FOCUS</text>';
+  }
+ }else if(defect==='hypermetropia'){
+  if(corrected){
+   corrective=lensMarkup(210,'convex','CONVEX');
+   paths='<path class="ray-in" d="'+rayPath([[42,112],[210,112]])+'"/><path class="ray-out" d="'+rayPath([[210,112],[338,140],[392,146],[566,170]])+'"/>'+
+    '<path class="ray-in" d="'+rayPath([[42,228],[210,228]])+'"/><path class="ray-out" d="'+rayPath([[210,228],[338,200],[392,194],[566,170]])+'"/>';
+   focus='<circle class="focus-good" cx="566" cy="170" r="6"/><text x="575" y="157" class="small-label">FOCUS ON RETINA</text>';
+  }else{
+   paths='<path class="ray-in" d="'+rayPath([[42,112],[392,135]])+'"/><path class="ray-bad" d="'+rayPath([[392,135],[630,170],[680,177]])+'"/>'+
+    '<path class="ray-in" d="'+rayPath([[42,228],[392,205]])+'"/><path class="ray-bad" d="'+rayPath([[392,205],[630,170],[680,163]])+'"/>';
+   focus='<circle class="focus-point" cx="630" cy="170" r="6"/><text x="630" y="150" text-anchor="middle" class="small-label">FOCUS BEHIND RETINA</text>';
+  }
+ }else if(defect==='presbyopia'){
+  if(corrected){
+   corrective=lensMarkup(210,'convex','READING ADD');
+   paths='<path class="ray-in" d="'+rayPath([[42,170],[210,118]])+'"/><path class="ray-out" d="'+rayPath([[210,118],[338,140],[392,146],[566,170]])+'"/>'+
+    '<path class="ray-in" d="'+rayPath([[42,170],[210,222]])+'"/><path class="ray-out" d="'+rayPath([[210,222],[338,200],[392,194],[566,170]])+'"/>';
+   focus='<circle class="focus-good" cx="566" cy="170" r="6"/><text x="575" y="157" class="small-label">FOCUS ON RETINA</text>';
+  }else{
+   paths='<path class="ray-in" d="'+rayPath([[42,170],[392,118]])+'"/><path class="ray-bad" d="'+rayPath([[392,118],[620,170],[680,184]])+'"/>'+
+    '<path class="ray-in" d="'+rayPath([[42,170],[392,222]])+'"/><path class="ray-bad" d="'+rayPath([[392,222],[620,170],[680,156]])+'"/>';
+   focus='<circle class="focus-point" cx="620" cy="170" r="6"/><text x="620" y="150" text-anchor="middle" class="small-label">NEAR FOCUS BEHIND RETINA</text>';
+  }
+ }else{
+  if(corrected){
+   corrective=lensMarkup(210,'convex','TORIC / CYLINDRICAL');
+   paths='<path class="ray-in" d="'+rayPath([[42,112],[210,112],[338,140],[392,146],[566,170]])+'"/>'+
+    '<path class="ray-in" d="'+rayPath([[42,228],[210,228],[338,200],[392,194],[566,170]])+'"/>'+
+    '<path class="ray-out" d="'+rayPath([[42,145],[210,145],[338,158],[392,160],[566,170]])+'"/>';
+   focus='<circle class="focus-good" cx="566" cy="170" r="6"/><text x="575" y="157" class="small-label">MERIDIANS CORRECTED</text>';
+  }else{
+   paths='<path class="ray-in" d="'+rayPath([[42,112],[392,140]])+'"/><path class="ray-bad" d="'+rayPath([[392,140],[510,170],[566,184]])+'"/>'+
+    '<path class="ray-in" d="'+rayPath([[42,228],[392,200]])+'"/><path class="ray-bad" d="'+rayPath([[392,200],[625,170],[680,163]])+'"/>';
+   focus='<circle class="focus-point" cx="510" cy="170" r="5"/><circle class="focus-point" cx="625" cy="170" r="5"/><text x="510" y="150" text-anchor="middle" class="small-label">FOCAL LINE 1</text><text x="625" y="192" text-anchor="middle" class="small-label">FOCAL LINE 2</text>';
+  }
+ }
+ const retinaNote=corrected?'RAYS BROUGHT TO RETINAL PLANE':'SCHEMATIC RAY PATH';
+ return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 300" role="img" aria-label="'+visionDefects[defect].name+(corrected?' with corrective lens':' without correction')+'">'+
+  commonStart+corrective+paths+focus+
+  '<text x="392" y="286" text-anchor="middle" class="small-label">EYE</text>'+
+  '<text x="700" y="286" text-anchor="end" class="small-label">'+retinaNote+'</text></svg>';
+}
+function renderDefect(){
+ const data=visionDefects[activeDefect];
+ document.querySelectorAll('.defect-choice').forEach(button=>button.classList.toggle('active',button.dataset.defect===activeDefect));
+ document.querySelectorAll('[data-ray-mode]').forEach(button=>button.classList.toggle('active',button.dataset.rayMode===rayMode));
+ document.querySelector('#rayDiagramTitle').textContent=data.diagramTitle;
+ document.querySelector('#defectRayDiagram').outerHTML=makeDiagramSvg(activeDefect,rayMode==='corrected');
+ document.querySelector('#defectName').textContent=data.name;
+ document.querySelector('#defectCategory').textContent=data.category;
+ document.querySelector('#defectSummary').textContent=data.summary;
+ document.querySelector('#defectImagePosition').textContent=data.imagePosition;
+ document.querySelector('#defectCorrection').textContent=data.correction;
+ document.querySelector('#defectOpticalEffect').textContent=data.opticalEffect;
+ document.querySelector('#defectWhy').textContent=data.why;
+ document.querySelector('#defectMemory').textContent=data.memory;
+ document.querySelector('#defectQuestion').textContent=data.question;
+ document.querySelector('#defectQuestionHint').textContent='Choose one answer to check your understanding.';
+ const answerBox=document.querySelector('#defectAnswers');answerBox.innerHTML='';
+ document.querySelector('#defectAnswerFeedback').hidden=true;
+ data.answers.forEach((answer,index)=>{
+  const button=document.createElement('button');
+  button.type='button';button.className='defect-answer';button.textContent=String.fromCharCode(65+index)+'. '+answer;
+  button.addEventListener('click',()=>checkDefectAnswer(index));
+  answerBox.appendChild(button);
+ });
+}
+function checkDefectAnswer(index){
+ const data=visionDefects[activeDefect];
+ const feedback=document.querySelector('#defectAnswerFeedback');
+ document.querySelectorAll('.defect-answer').forEach((button,i)=>{
+  button.disabled=true;
+  if(i===data.correct)button.classList.add('correct');
+  else if(i===index)button.classList.add('wrong');
+ });
+ feedback.hidden=false;
+ feedback.textContent=(index===data.correct?'Correct! ':'Not quite. ')+data.feedback;
+}
+document.querySelectorAll('.defect-choice').forEach(button=>button.addEventListener('click',()=>{
+ activeDefect=button.dataset.defect;renderDefect();
+}));
+document.querySelectorAll('[data-ray-mode]').forEach(button=>button.addEventListener('click',()=>{
+ rayMode=button.dataset.rayMode;renderDefect();
+}));
+renderDefect();
