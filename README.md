@@ -1,29 +1,41 @@
 # SUBA AI – Human Eye Anatomy Lab
 
-An interactive 3D teaching viewer for external and internal eye anatomy.
+Interactive 3D educational eye viewer built with Three.js.
 
-## Status
+## Included in this repository
 
-The web viewer source and attribution are being committed here. The binary model files and Draco decoder files must be uploaded using GitHub's browser interface (instructions below), because the connected GitHub file action accepts text files rather than binary GLB data.
+- `index.html`, `style.css`, `app.js`: responsive web viewer
+- `licenses/`: model attribution and third-party notices
+- `models/README.md`: exact locations and names for the two required binary models
 
-## Required binary assets
+## Required GLB uploads
 
-In this repository, use **Add file → Upload files** and upload these exact files while preserving their paths:
+The web viewer source is committed, but the GLB files are binary and still need to be uploaded through GitHub's browser interface.
 
-- `models/eye-anatomy.glb` — copy from your Ocularium integration kit. It is the 23-mesh HRA-derived internal anatomy model.
-- `models/human_eye.glb` — your DEGUIDER Sketchfab exterior download.
-  
-The viewer uses the Draco decoder from Google's public CDN; no local Draco files are required.
+1. Open the [models folder](https://github.com/subhajitdas722/SUBA-AI-Human-Eye-Lab/tree/main/models).
+2. Select **Add file → Upload files**.
+3. Upload these two files, keeping the exact filenames:
+   - `eye-anatomy.glb` — from the Ocularium archive: `ocularium-main/public/models/eye-anatomy.glb`.
+   - `human_eye.glb` — your downloaded DEGUIDER Sketchfab exterior model.
+4. Commit the upload to the `main` branch.
+
+The viewer loads the GLB assets from these paths:
+- `./models/eye-anatomy.glb`
+- `./models/human_eye.glb`
+
+The internal HRA-derived GLB is Draco-compressed. The viewer loads the Google Draco 1.5.7 decoder from Google's CDN; no local Draco decoder files need to be uploaded. Internet access is required for Three.js modules and the decoder.
 
 ## Run locally
+
+From the repository root:
 
 ```bash
 python -m http.server 8000
 ```
 
-Open http://localhost:8000. Do not open the page using `file://`.
+Open http://localhost:8000. Do not open the page with `file://`.
 
-## Enable GitHub Pages
+## Publish with GitHub Pages
 
 1. Open **Settings → Pages**.
 2. Under Build and deployment, choose **Deploy from a branch**.
@@ -35,8 +47,9 @@ https://subhajitdas722.github.io/SUBA-AI-Human-Eye-Lab/
 
 ## Licence and attribution
 
-- HRA-derived anatomical model via Ocularium: upstream project identifies the asset as CC BY 4.0. See `licenses/ATTRIBUTION.txt`.
-- DEGUIDER exterior Sketchfab model: source listing identifies it as CC BY. Preserve creator credit and source link.
-- The Science Museum Group model is not included because its CC BY-NC licence restricts commercial use.
+- The HRA-derived anatomical model via Ocularium is identified by the upstream project as CC BY 4.0. See `licenses/ATTRIBUTION.txt`.
+- The DEGUIDER exterior Sketchfab model is identified by the source listing as CC BY. Preserve creator credit and source link.
+- The Science Museum Group scan is not included because its CC BY-NC licence restricts commercial use.
+- Three.js and Draco are third-party libraries; see `licenses/THIRD_PARTY.txt`.
 
-The internal GLB has 23 named meshes. It does not contain an individually named optic nerve mesh. A layer list is not a guarantee that every named anatomical term is an independently isolated biological tissue.
+The internal model has 23 named meshes. It does not contain an individually named optic nerve mesh. The layer list should not be interpreted as a guarantee that every anatomical term is an isolated biological tissue.
