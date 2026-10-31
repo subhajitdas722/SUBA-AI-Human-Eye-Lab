@@ -33,6 +33,93 @@
  <section class="panel note"><b>Teaching note</b><p>The cross-section model contains 54 mesh objects grouped into named anatomical parts. The exterior model contains two separately labelled meshes: eye body and iris. Some grouped structures are not separate biological tissues.</p></section>
 </aside>
 </main>
+
+<section class="learning-hub" id="learning-hub" aria-labelledby="learningTitle">
+ <div class="learning-heading">
+  <div>
+   <span class="eyebrow">STUDENT LEARNING ZONE</span>
+   <h2 id="learningTitle">Human Eye Learning Studio</h2>
+   <p>Understand the anatomy, revise important terms and check your understanding.</p>
+  </div>
+  <div class="learning-progress">
+   <span class="progress-caption">YOUR REVISION PROGRESS</span>
+   <strong id="studyProgressText">0 of 6 lessons revised</strong>
+   <div class="progress-track"><span id="studyProgressBar"></span></div>
+  </div>
+ </div>
+ <nav class="study-tabs" aria-label="Learning tools">
+  <button class="study-tab active" type="button" data-study-tab="learn" aria-selected="true"><span>01</span> Guided lessons</button>
+  <button class="study-tab" type="button" data-study-tab="cards" aria-selected="false"><span>02</span> Flashcards</button>
+  <button class="study-tab" type="button" data-study-tab="quiz" aria-selected="false"><span>03</span> Quick quiz</button>
+  <button class="study-tab" type="button" data-study-tab="glossary" aria-selected="false"><span>04</span> Glossary</button>
+ </nav>
+
+ <section class="study-panel" id="studyLearn" data-study-panel="learn">
+  <div class="lesson-layout">
+   <div class="lesson-rail">
+    <div class="eyebrow">LEARNING PATH</div>
+    <div id="lessonList" class="lesson-list"></div>
+   </div>
+   <article class="lesson-card">
+    <div class="lesson-meta"><span id="lessonNumber">LESSON 01 / 06</span><span id="lessonTag">ANATOMY</span></div>
+    <h3 id="lessonTitle">The cornea</h3>
+    <p id="lessonLead" class="lesson-lead"></p>
+    <div class="lesson-explanation" id="lessonBody"></div>
+    <div class="exam-tip"><strong>Remember for exams</strong><p id="lessonExamTip"></p></div>
+    <div class="lesson-actions">
+     <button type="button" id="lessonFocus" class="button-primary">Locate in 3D viewer</button>
+     <button type="button" id="lessonComplete" class="button-secondary">Mark as revised</button>
+     <div class="lesson-spacer"></div>
+     <button type="button" id="lessonPrev" class="button-quiet">Previous</button>
+     <button type="button" id="lessonNext" class="button-primary">Next lesson →</button>
+    </div>
+    <p class="study-status" id="lessonStatus" aria-live="polite"></p>
+   </article>
+  </div>
+ </section>
+
+ <section class="study-panel" id="studyCards" data-study-panel="cards" hidden>
+  <div class="tool-intro"><div><span class="eyebrow">ACTIVE RECALL</span><h3>Flashcards</h3><p>Try to answer from memory before revealing the explanation.</p></div><strong id="cardCounter">CARD 01 / 12</strong></div>
+  <div class="flashcard-wrap">
+   <button type="button" class="flashcard" id="flashcard" aria-label="Reveal flashcard answer">
+    <span class="flashcard-top"><span id="flashcardCategory">ANATOMY</span><span>SUBA AI · REVISION CARD</span></span>
+    <span class="flashcard-term" id="flashcardTerm">What does the cornea do?</span>
+    <span class="flashcard-answer" id="flashcardAnswer" hidden></span>
+    <span class="flashcard-hint" id="flashcardHint">Tap to reveal the answer</span>
+   </button>
+  </div>
+  <div class="flashcard-controls">
+   <button type="button" class="button-secondary" id="cardPrev">← Previous</button>
+   <button type="button" class="button-primary" id="cardReveal">Reveal answer</button>
+   <button type="button" class="button-secondary" id="cardNext">Next card →</button>
+  </div>
+ </section>
+
+ <section class="study-panel" id="studyQuiz" data-study-panel="quiz" hidden>
+  <div class="tool-intro"><div><span class="eyebrow">CHECK YOUR UNDERSTANDING</span><h3>Quick knowledge check</h3><p>Eight questions covering eye anatomy and basic vision concepts.</p></div><strong id="quizCounter">QUESTION 1 / 8</strong></div>
+  <div class="quiz-progress"><span id="quizProgressBar"></span></div>
+  <article class="quiz-card">
+   <div class="quiz-topic" id="quizTopic">ANATOMY</div>
+   <h3 id="quizQuestion">Which structure provides most of the eye's refractive power?</h3>
+   <div id="quizOptions" class="quiz-options"></div>
+   <div id="quizFeedback" class="quiz-feedback" aria-live="polite" hidden></div>
+   <div class="quiz-actions"><span id="quizScoreLive">Score: 0</span><button type="button" id="quizNext" class="button-primary" disabled>Next question →</button></div>
+  </article>
+  <article id="quizResult" class="quiz-result" hidden>
+   <span class="eyebrow">QUIZ COMPLETED</span><h3 id="quizResultTitle">Good work!</h3><p id="quizResultText"></p>
+   <button type="button" id="quizRestart" class="button-primary">Try again</button>
+  </article>
+ </section>
+
+ <section class="study-panel" id="studyGlossary" data-study-panel="glossary" hidden>
+  <div class="tool-intro"><div><span class="eyebrow">QUICK REFERENCE</span><h3>Physics & anatomy glossary</h3><p>Search a term to see a student-friendly definition.</p></div><strong id="glossaryCount">15 TERMS</strong></div>
+  <input id="glossarySearch" class="glossary-search" type="search" placeholder="Search: accommodation, retina, myopia…" aria-label="Search glossary terms">
+  <div id="glossaryList" class="glossary-list"></div>
+  <p id="glossaryEmpty" class="glossary-empty" hidden>No matching term. Try another keyword.</p>
+ </section>
+ <div class="learning-footnote"><strong>Study tip:</strong> Look at a structure in the 3D viewer, read its function, then test yourself with a flashcard. This sequence helps connect the shape with its role.</div>
+</section>
+
 <footer>SUBA AI · Educational visualization · Not for clinical diagnosis · Model attribution in <code>licenses/ATTRIBUTION.txt</code></footer>
 <script type="module" src="app.js"></script>
 </body></html>
