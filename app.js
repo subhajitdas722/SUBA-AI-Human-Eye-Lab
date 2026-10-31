@@ -17,9 +17,11 @@ stage.appendChild(renderer.domElement);
 
 const labelLayer=document.createElement('div');
 labelLayer.id='modelLabelLayer';
-labelLayer.setAttribute('aria-hidden','true');
+labelLayer.setAttribute('role','group');
+labelLayer.setAttribute('aria-label','Interactive anatomical model labels');
 const labelSvg=document.createElementNS('http://www.w3.org/2000/svg','svg');
 labelSvg.classList.add('model-label-lines');
+labelSvg.setAttribute('aria-hidden','true');
 labelLayer.appendChild(labelSvg);
 stage.appendChild(labelLayer);
 
@@ -148,14 +150,28 @@ function buildModelLabels(){
   el.type='button';
   el.className='anatomy-callout';
   el.setAttribute('aria-label','Locate '+entity.label);
-  el.innerHTML='<span class="callout-index">'+String(index+1).padStart(2,'0')+'</span><span class="callout-copy"><span class="callout-kicker">'+(mode==='anatomy'?'ANATOMY':'EXTERIOR')+'</span><span class="callout-title"></span></span><span class="callout-chevron">↗</span>';
+  const roleNames={
+   'Cornea':'REFRACTIVE SURFACE','Iris':'LIGHT CONTROL','Crystalline lens':'FOCUSING',
+   'Suspensory ligaments':'ACCOMMODATION','Sclera':'OUTER COAT','Choroid':'VASCULAR LAYER',
+   'Muscle group 1':'MUSCLE GROUP','Muscle group 2':'MUSCLE GROUP','Retina':'SENSORY LAYER',
+   'Artery':'BLOOD SUPPLY','Vein':'BLOOD SUPPLY','Eye body':'EXTERIOR MESH'
+  };
+  const kicker=mode==='anatomy'?(roleNames[entity.label]||'ANATOMICAL PART'):(roleNames[entity.label]||'EXTERIOR MESH');
+  el.innerHTML='<span class="callout-index">'+String(index+1).padStart(2,'0')+'</span><span class="callout-copy"><span class="callout-kicker"></span><span class="callout-title"></span></span><span class="callout-chevron">↗</span>';
+  el.querySelector('.callout-kicker').textContent=kicker;
   el.querySelector('.callout-title').textContent=entity.label;
   el.addEventListener('click',()=>{
    selectEntity(entity);
    focusEntity(entity);
   });
-  el.addEventListener('pointerenter',()=>el.classList.add('is-hovered'));
-  el.addEventListener('pointerleave',()=>el.classList.remove('is-hovered'));
+  el.addEventListener('pointerenter',()=>{
+   el.classList.add('is-hovered');
+   if(selected!==entity)setEntityHighlight(entity,true);
+  });
+  el.addEventListener('pointerleave',()=>{
+   el.classList.remove('is-hovered');
+   if(selected!==entity)setEntityHighlight(entity,false);
+  });
   labelLayer.appendChild(el);
   const path=document.createElementNS('http://www.w3.org/2000/svg','path');
   path.setAttribute('class','callout-connector');
