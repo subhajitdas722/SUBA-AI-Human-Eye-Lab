@@ -52,6 +52,7 @@
   <button class="study-tab" type="button" data-study-tab="cards" aria-selected="false"><span>02</span> Flashcards</button>
   <button class="study-tab" type="button" data-study-tab="quiz" aria-selected="false"><span>03</span> Quick quiz</button>
   <button class="study-tab" type="button" data-study-tab="glossary" aria-selected="false"><span>04</span> Glossary</button>
+  <button class="study-tab" type="button" data-study-tab="defects" aria-selected="false"><span>05</span> Vision defects lab</button>
  </nav>
 
  <section class="study-panel" id="studyLearn" data-study-panel="learn">
@@ -109,6 +110,54 @@
    <span class="eyebrow">QUIZ COMPLETED</span><h3 id="quizResultTitle">Good work!</h3><p id="quizResultText"></p>
    <button type="button" id="quizRestart" class="button-primary">Try again</button>
   </article>
+ </section>
+
+
+ <section class="study-panel" id="studyDefects" data-study-panel="defects" hidden>
+  <div class="tool-intro">
+   <div><span class="eyebrow">OPTICS & VISION CORRECTION</span><h3>Vision Defects & Correction Lab</h3><p>Choose a condition, compare the image formation and discover how corrective lenses help.</p></div>
+   <strong>INTERACTIVE RAY DIAGRAM</strong>
+  </div>
+  <div class="defect-selector" role="group" aria-label="Choose a vision defect">
+   <button type="button" class="defect-choice active" data-defect="myopia"><span>01</span><strong>Myopia</strong><small>Short-sightedness</small></button>
+   <button type="button" class="defect-choice" data-defect="hypermetropia"><span>02</span><strong>Hypermetropia</strong><small>Long-sightedness</small></button>
+   <button type="button" class="defect-choice" data-defect="presbyopia"><span>03</span><strong>Presbyopia</strong><small>Age-related near-focus difficulty</small></button>
+   <button type="button" class="defect-choice" data-defect="astigmatism"><span>04</span><strong>Astigmatism</strong><small>Unequal focusing in meridians</small></button>
+  </div>
+  <div class="defect-workspace">
+   <div class="ray-panel">
+    <div class="ray-panel-heading"><div><span class="eyebrow">SCHEMATIC OPTICS</span><h4 id="rayDiagramTitle">Myopia — image forms before the retina</h4></div>
+     <div class="ray-mode-toggle" role="group" aria-label="Compare correction">
+      <button type="button" data-ray-mode="uncorrected" class="active">Without correction</button>
+      <button type="button" data-ray-mode="corrected">With correction</button>
+     </div>
+    </div>
+    <div class="ray-diagram-frame">
+     <svg id="defectRayDiagram" viewBox="0 0 760 340" role="img" aria-label="Schematic ray diagram of myopia without correction"></svg>
+    </div>
+    <div class="ray-legend"><span><i class="ray-key incoming"></i>Incoming light</span><span><i class="ray-key refracted"></i>Refracted rays</span><span><i class="ray-key focus"></i>Image focus</span></div>
+    <p class="diagram-caveat">Conceptual teaching diagram; ray paths and proportions are schematic, not a clinical eye model or prescription calculator.</p>
+   </div>
+   <aside class="defect-explainer">
+    <span class="eyebrow" id="defectCategory">REFRACTIVE ERROR</span>
+    <h4 id="defectName">Myopia (short-sightedness)</h4>
+    <p id="defectSummary">Distant objects appear blurred because light focuses in front of the retina.</p>
+    <div class="defect-facts">
+     <div><span>IMAGE POSITION</span><strong id="defectImagePosition">In front of retina</strong></div>
+     <div><span>COMMON CORRECTION</span><strong id="defectCorrection">Concave (diverging) lens</strong></div>
+     <div><span>OPTICAL EFFECT</span><strong id="defectOpticalEffect">Diverges incoming rays before the eye</strong></div>
+    </div>
+    <div class="defect-why"><strong>Why does the correction work?</strong><p id="defectWhy"></p></div>
+    <div class="defect-memory"><strong>Remember</strong><p id="defectMemory"></p></div>
+   </aside>
+  </div>
+  <div class="defect-practice">
+   <div><span class="eyebrow">QUICK CHECK</span><h4 id="defectQuestion">Which type of lens corrects myopia?</h4><p id="defectQuestionHint">Choose one answer to check your understanding.</p></div>
+   <div class="defect-answer-area">
+    <div id="defectAnswers" class="defect-answers"></div>
+    <div id="defectAnswerFeedback" class="defect-answer-feedback" aria-live="polite" hidden></div>
+   </div>
+  </div>
  </section>
 
  <section class="study-panel" id="studyGlossary" data-study-panel="glossary" hidden>
