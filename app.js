@@ -82,22 +82,15 @@ function resize(){
  labelSvg.setAttribute('viewBox',`0 0 ${w} ${h}`);
  labelSvg.setAttribute('width',w);
  labelSvg.setAttribute('height',h);
+ if(typeof layoutModelLabels==='function')layoutModelLabels();
 }
 window.addEventListener('resize',resize);resize();
 
 function activeEntities(){
  return mode==='anatomy'?entities:exteriorEntities;
 }
-const labelRaycaster=new THREE.Raycaster();
-let labelFrame=0;
-function labelRoots(entity){return entity.objects||[];}
-function isWithinEntity(object,entity){
- let current=object;
- while(current){
-  if(labelRoots(entity).includes(current))return true;
-  current=current.parent;
- }
- return false;
+function modelRootForMode(){
+ return mode==='anatomy'?anatomyModel?.model:exteriorModel;
 }
 function isEffectivelyVisible(object,stopAt){
  let current=object;
@@ -107,34 +100,24 @@ function isEffectivelyVisible(object,stopAt){
  }
  return true;
 }
-function visibleModelMeshes(){
- const root=mode==='anatomy'?anatomyModel?.model:exteriorModel;
- const meshes=[];
- if(!root)return meshes;
- root.traverse(object=>{
-  if(object.isMesh && isEffectivelyVisible(object,root))meshes.push(object);
- });
- return meshes;
-}
-function anchorForEntity(entity,meshPool){
+function createStableAnchor(entity){
  const box=new THREE.Box3();
  entity.objects.forEach(object=>box.expandByObject(object));
  if(box.isEmpty())return null;
- const center=box.getCenter(new THREE.Vector3());
- const rayDirection=center.clone().sub(camera.position);
- const distance=rayDirection.length();
- if(distance<0.0001)return {point:center,occluded:false};
- labelRaycaster.set(camera.position,rayDirection.normalize());
- labelRaycaster.far=distance+0.04;
- const hits=labelRaycaster.intersectObjects(meshPool,false);
- const first=hits[0];
- if(first && first.distance<distance-0.06 && !isWithinEntity(first.object,entity)){
-  return {point:first.point,occluded:true};
- }
- if(first && isWithinEntity(first.object,entity)){
-  return {point:first.point,occluded:false};
- }
- return {point:center,occluded:false};
+ const worldCenter=box.getCenter(new THREE.Vector3());
+ const modelRoot=modelRootForMode();
+ if(!modelRoot)return null;
+ // A single named group gets its own child anchor so the pin follows that
+ // structure if it is moved by the explode control. Multi-object groups use
+ // the model root to keep their combined centre stable.
+ const parent=entity.objects.length===1?entity.objects[0]:modelRoot;
+ parent.updateWorldMatrix(true,true);
+ const localCenter=parent.worldToLocal(worldCenter.clone());
+ const anchor=new THREE.Object3D();
+ anchor.name='label-anchor-'+entity.label.replace(/[^a-z0-9]+/gi,'-').toLowerCase();
+ anchor.position.copy(localCenter);
+ parent.add(anchor);
+ return anchor;
 }
 function buildModelLabels(){
  labelItems=[];
@@ -156,14 +139,11 @@ function buildModelLabels(){
    'Muscle group 1':'MUSCLE GROUP','Muscle group 2':'MUSCLE GROUP','Retina':'SENSORY LAYER',
    'Artery':'BLOOD SUPPLY','Vein':'BLOOD SUPPLY','Eye body':'EXTERIOR MESH'
   };
-  const kicker=mode==='anatomy'?(roleNames[entity.label]||'ANATOMICAL PART'):(roleNames[entity.label]||'EXTERIOR MESH');
+  const kicker=roleNames[entity.label]||'ANATOMICAL PART';
   el.innerHTML='<span class="callout-index">'+String(index+1).padStart(2,'0')+'</span><span class="callout-copy"><span class="callout-kicker"></span><span class="callout-title"></span></span><span class="callout-chevron">↗</span>';
   el.querySelector('.callout-kicker').textContent=kicker;
   el.querySelector('.callout-title').textContent=entity.label;
-  el.addEventListener('click',()=>{
-   selectEntity(entity);
-   focusEntity(entity);
-  });
+  el.addEventListener('click',()=>{selectEntity(entity);focusEntity(entity);});
   el.addEventListener('pointerenter',()=>{
    el.classList.add('is-hovered');
    if(selected!==entity)setEntityHighlight(entity,true);
@@ -174,102 +154,100 @@ function buildModelLabels(){
   });
   labelLayer.appendChild(el);
   const path=document.createElementNS('http://www.w3.org/2000/svg','path');
-  path.setAttribute('class','callout-connector');
-  labelSvg.appendChild(path);
+  path.setAttribute('class','callout-connector');labelSvg.appendChild(path);
   const halo=document.createElementNS('http://www.w3.org/2000/svg','circle');
-  halo.setAttribute('class','callout-anchor-halo');halo.setAttribute('r','7');
-  labelSvg.appendChild(halo);
+  halo.setAttribute('class','callout-anchor-halo');halo.setAttribute('r','6');labelSvg.appendChild(halo);
   const dot=document.createElementNS('http://www.w3.org/2000/svg','circle');
-  dot.setAttribute('class','callout-anchor-dot');dot.setAttribute('r','2.6');
-  labelSvg.appendChild(dot);
-  labelItems.push({entity,el,path,halo,dot,anchor:null,x:0,y:0,side:'left',index,occluded:false});
+  dot.setAttribute('class','callout-anchor-dot');dot.setAttribute('r','2.4');labelSvg.appendChild(dot);
+  labelItems.push({
+   entity,el,path,halo,dot,anchorNode:createStableAnchor(entity),
+   side:'left',screenX:0,screenY:0,layoutX:0,layoutY:0,
+   visible:false,index
+  });
  });
- updateModelLabels(true);
+ layoutModelLabels();
+ updateModelLabels(1);
 }
-function updateModelLabels(force=false){
+function layoutModelLabels(){
+ if(!labelItems.length)return;
+ const width=stage.clientWidth,height=stage.clientHeight;
+ const compact=width<720;
+ const cardWidth=compact?120:158;
+ const edgeGap=compact?6:12;
+ camera.updateMatrixWorld(true);
+ labelItems.forEach(item=>{
+  if(!item.anchorNode)return;
+  const p=item.anchorNode.getWorldPosition(new THREE.Vector3()).project(camera);
+  item.side=p.x<0?'left':'right';
+ });
+ const groups={
+  left:labelItems.filter(item=>item.side==='left').sort((a,b)=>a.index-b.index),
+  right:labelItems.filter(item=>item.side==='right').sort((a,b)=>a.index-b.index)
+ };
+ for(const side of ['left','right']){
+  const items=groups[side];
+  const top=22,bottom=Math.max(top+1,height-22);
+  items.forEach((item,index)=>{
+   item.layoutX=side==='left'?edgeGap:Math.max(edgeGap,width-cardWidth-edgeGap);
+   item.layoutY=items.length===1?(top+bottom)/2:top+(bottom-top)*index/(items.length-1);
+   item.el.style.left=item.layoutX+'px';
+   item.el.style.top=item.layoutY+'px';
+   item.el.style.width=cardWidth+'px';
+  });
+ }
+}
+function updateModelLabels(dt=1/60){
  if(!labelsEnabled || !labelItems.length || !labelLayer.isConnected){
-  labelLayer.style.display='none';
-  return;
+  labelLayer.style.display='none';return;
  }
  labelLayer.style.display='block';
  const width=stage.clientWidth,height=stage.clientHeight;
- const compact=width<720;
- const labelWidth=compact?118:158;
- const labelHeight=compact?30:36;
- const pool=visibleModelMeshes();
- labelFrame++;
+ const stopAt=modelRootForMode();
+ camera.updateMatrixWorld(true);
+ // One smooth exponential interpolation makes the connector ends settle
+ // naturally without expensive raycasts or layout reflow.
+ const alpha=1-Math.exp(-18*Math.min(Math.max(dt,0),0.05));
  labelItems.forEach(item=>{
-  const stopAt=mode==='anatomy'?anatomyModel?.model:exteriorModel;
-  const isVisible=item.entity.objects.some(obj=>isEffectivelyVisible(obj,stopAt));
-  if(!isVisible){
-   item.el.style.display='none';item.path.style.display='none';item.halo.style.display='none';item.dot.style.display='none';return;
+  const entityVisible=item.entity.objects.some(obj=>isEffectivelyVisible(obj,stopAt));
+  if(!entityVisible || !item.anchorNode){
+   item.el.style.display='none';item.path.style.display='none';
+   item.halo.style.display='none';item.dot.style.display='none';return;
   }
-  if(force || labelFrame%3===0 || !item.anchor){
-   const result=anchorForEntity(item.entity,pool);
-   item.anchor=result?.point?.clone()||null;
-   item.occluded=Boolean(result?.occluded);
+  const projected=item.anchorNode.getWorldPosition(new THREE.Vector3()).project(camera);
+  if(projected.z<-1 || projected.z>1 || projected.x<-1.08 || projected.x>1.08 || projected.y<-1.08 || projected.y>1.08){
+   item.el.style.display='none';item.path.style.display='none';
+   item.halo.style.display='none';item.dot.style.display='none';return;
   }
+  const targetX=(projected.x*0.5+0.5)*width;
+  const targetY=(-projected.y*0.5+0.5)*height;
+  if(!item.visible){
+   item.screenX=targetX;item.screenY=targetY;item.visible=true;
+  }else{
+   item.screenX+=(targetX-item.screenX)*alpha;
+   item.screenY+=(targetY-item.screenY)*alpha;
+  }
+  const anchorX=item.screenX,anchorY=item.screenY;
+  item.el.style.display='grid';
+  item.el.classList.toggle('is-active',item.entity===selected);
+  item.el.style.transform='translate3d(0,0,0)';
+  const cardWidth=item.el.offsetWidth||158;
+  const cardHeight=item.el.offsetHeight||36;
+  const cardX=item.layoutX,cardY=item.layoutY;
+  const edgeX=item.side==='left'?cardX+cardWidth:cardX;
+  const edgeY=cardY+cardHeight/2;
+  const bendX=anchorX+(edgeX-anchorX)*0.55;
+  const curve='M '+anchorX.toFixed(2)+' '+anchorY.toFixed(2)+
+    ' C '+bendX.toFixed(2)+' '+anchorY.toFixed(2)+
+    ' '+bendX.toFixed(2)+' '+edgeY.toFixed(2)+
+    ' '+edgeX.toFixed(2)+' '+edgeY.toFixed(2);
+  item.path.setAttribute('d',curve);item.path.style.display='block';
+  item.path.classList.toggle('is-active',item.entity===selected);
+  item.halo.setAttribute('cx',anchorX);item.halo.setAttribute('cy',anchorY);
+  item.dot.setAttribute('cx',anchorX);item.dot.setAttribute('cy',anchorY);
+  item.halo.style.display='block';item.dot.style.display='block';
+  item.halo.classList.toggle('is-active',item.entity===selected);
+  item.dot.classList.toggle('is-active',item.entity===selected);
  });
- const visible=[];
- labelItems.forEach(item=>{
-  if(!item.anchor || item.occluded){
-   item.el.style.display='none';item.path.style.display='none';item.halo.style.display='none';item.dot.style.display='none';return;
-  }
-  const projected=item.anchor.clone().project(camera);
-  if(projected.z<-1 || projected.z>1){
-   item.el.style.display='none';item.path.style.display='none';item.halo.style.display='none';item.dot.style.display='none';return;
-  }
-  const x=(projected.x*.5+.5)*width;
-  const y=(-projected.y*.5+.5)*height;
-  if(x<-8 || x>width+8 || y<-8 || y>height+8){
-   item.el.style.display='none';item.path.style.display='none';item.halo.style.display='none';item.dot.style.display='none';return;
-  }
-  item.x=x;item.y=y;item.side=x<width*.5?'left':'right';
-  visible.push(item);
- });
- const groups={
-  left:visible.filter(item=>item.side==='left').sort((a,b)=>a.y-b.y),
-  right:visible.filter(item=>item.side==='right').sort((a,b)=>a.y-b.y)
- };
- for(const [side,items] of Object.entries(groups)){
-  if(!items.length)continue;
-  const top=labelHeight*.5+8,bottom=height-labelHeight*.5-8;
-  const step=Math.min(labelHeight+7,Math.max(labelHeight+3,(bottom-top)/Math.max(1,items.length-1)));
-  const ys=items.map(item=>THREE.MathUtils.clamp(item.y,top,bottom));
-  for(let i=1;i<ys.length;i++)ys[i]=Math.max(ys[i],ys[i-1]+step);
-  if(ys[ys.length-1]>bottom){
-   const shift=ys[ys.length-1]-bottom;
-   for(let i=0;i<ys.length;i++)ys[i]-=shift;
-  }
-  for(let i=ys.length-2;i>=0;i--)ys[i]=Math.min(ys[i],ys[i+1]-step);
-  if(ys[0]<top){
-   const shift=top-ys[0];
-   for(let i=0;i<ys.length;i++)ys[i]+=shift;
-  }
-  items.forEach((item,i)=>{
-   const x=side==='left'?10:Math.max(10,width-labelWidth-10);
-   const y=ys[i],edgeX=side==='left'?x+labelWidth:x,edgeY=y;
-   item.el.style.display='grid';
-   item.el.style.left=x+'px';
-   item.el.style.top=(y-labelHeight/2)+'px';
-   item.el.style.width=labelWidth+'px';
-   item.el.classList.toggle('is-active',item.entity===selected);
-   const direction=side==='left'?-1:1;
-   const elbowX=item.x+(edgeX-item.x)*0.58;
-   const d='M '+item.x.toFixed(1)+' '+item.y.toFixed(1)+
-     ' L '+(elbowX+direction*5).toFixed(1)+' '+item.y.toFixed(1)+
-     ' Q '+elbowX.toFixed(1)+' '+item.y.toFixed(1)+' '+elbowX.toFixed(1)+' '+(item.y+(edgeY-item.y)*0.48).toFixed(1)+
-     ' L '+edgeX.toFixed(1)+' '+edgeY.toFixed(1);
-   item.path.setAttribute('d',d);
-   item.path.style.display='block';
-   item.path.classList.toggle('is-active',item.entity===selected);
-   item.halo.style.display='block';item.dot.style.display='block';
-   item.halo.setAttribute('cx',item.x);item.halo.setAttribute('cy',item.y);
-   item.dot.setAttribute('cx',item.x);item.dot.setAttribute('cy',item.y);
-   item.halo.classList.toggle('is-active',item.entity===selected);
-   item.dot.classList.toggle('is-active',item.entity===selected);
-  });
- }
 }
 
 function cloneMeshMaterials(model){
@@ -549,6 +527,7 @@ async function start(){
   console.warn('Exterior model could not be loaded:',e);
  }
 }
-function animate(){requestAnimationFrame(animate);controls.update();updateModelLabels();renderer.render(scene,camera);}
+let previousFrameTime=0;
+function animate(now=0){requestAnimationFrame(animate);const dt=previousFrameTime?Math.min((now-previousFrameTime)/1000,0.05):1/60;previousFrameTime=now;controls.update();updateModelLabels(dt);renderer.render(scene,camera);}
 start();
 animate();
