@@ -517,6 +517,7 @@ async function start(){
   document.querySelector('#loading').hidden=true;
   resetAnatomy();
   buildModelLabels();
+  renderLesson();
  }catch(e){
   console.error('Cross-section model load failed:',e);
   showMessage('Could not load eye-cross-section.glb.gz. Upload the compressed GLB into the models folder, then refresh. '+(e?.message||e),true);
