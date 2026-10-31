@@ -41,7 +41,7 @@ input[type=range]{width:100%;accent-color:#52cbc5}.wide{width:100%;margin-top:12
  border-radius:10px;background:linear-gradient(135deg,rgba(13,32,49,.96),rgba(7,20,34,.91));
  color:#e9f6ff;text-align:left;box-shadow:0 6px 20px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.055);
  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
- pointer-events:auto;cursor:pointer;transform:translateY(0);transition:border-color .18s,background .18s,box-shadow .18s,transform .18s;
+ pointer-events:auto;cursor:pointer;transform:translateY(0);transition:border-color .16s ease,background .16s ease,box-shadow .16s ease;will-change:auto;
 }
 .anatomy-callout:hover,.anatomy-callout.is-hovered{
  border-color:rgba(101,222,212,.88);background:linear-gradient(135deg,rgba(18,57,69,.97),rgba(8,29,43,.95));
@@ -74,10 +74,14 @@ input[type=range]{width:100%;accent-color:#52cbc5}.wide{width:100%;margin-top:12
 }
 
 .anatomy-callout:focus-visible{outline:2px solid #9af6e9;outline-offset:3px}
-.callout-anchor-halo{animation:anatomy-pin-breathe 2.8s ease-out infinite}
+.callout-anchor-halo{animation:none}
 .callout-anchor-halo.is-active{animation:none}
 @keyframes anatomy-pin-breathe{
  0%{stroke-opacity:.9;stroke-width:1.4}
  70%{stroke-opacity:.25;stroke-width:4.5}
  100%{stroke-opacity:.9;stroke-width:1.4}
 }
+
+/* Smooth callout tracking: let JS own position; keep paint-only transitions. */
+.anatomy-callout{transition:border-color .16s ease,background .16s ease,box-shadow .16s ease!important}
+.callout-anchor-halo,.callout-anchor-dot,.callout-connector{filter:none}
