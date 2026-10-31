@@ -23,7 +23,7 @@ controls.enablePan = false;
 controls.minDistance = 4.4;
 controls.maxDistance = 12;
 controls.target.set(0, 0.02, 0);
-camera.position.set(0, 1.05, 8.2);
+camera.position.set(6.2, 1.3, 2.8);
 
 scene.add(new THREE.AmbientLight(0xffffff, 0.42));
 scene.add(new THREE.HemisphereLight(0xfff8ee, 0x33252d, 0.72));
@@ -82,20 +82,20 @@ const descriptions = {
 };
 
 const anatomyStyle = {
-  VH_M_aqueous_humor_L:{color:0xb3d4e6,opacity:0.20,transparent:true,roughness:0.18},
+  VH_M_aqueous_humor_L:{color:0xb3d4e6,opacity:0.10,transparent:true,roughness:0.16},
   VH_M_bulbar_conjunctiva_L:{color:0xccb2a6,opacity:0.42,transparent:true},
   VH_M_ciliary_body_L:{color:0x8c5940},
   VH_M_ciliary_muscle_L:{color:0x99664a},
   VH_M_ciliary_processes_L:{color:0x854d38},
-  VH_M_cornea_L:{color:0xd8ecf2,opacity:0.36,transparent:true,roughness:0.08,clearcoat:1},
+  VH_M_cornea_L:{color:0xd8ecf2,opacity:0.18,transparent:true,roughness:0.07,clearcoat:0.8},
   VH_M_corneo_scleral_junction_L:{color:0xb9c8cc},
-  VH_M_iris_L:{color:0xa57a3c,roughness:0.72},
-  VH_M_lens_L:{color:0xdbe9ee,opacity:0.38,transparent:true,roughness:0.16,clearcoat:0.45},
+  VH_M_iris_L:{color:0x79532f,roughness:0.78},
+  VH_M_lens_L:{color:0xdbe9ee,opacity:0.24,transparent:true,roughness:0.12,clearcoat:0.35},
   VH_M_optic_choroid_L:{color:0x732633,roughness:0.78},
   VH_M_ora_serrata_of_retina_L:{color:0x8c666b},
   VH_M_palpebral_conjunctiva_of_lower_eyelid_L:{color:0xe08072,opacity:0.5,transparent:true},
   VH_M_palpebral_conjunctiva_of_upper_eyelid_L:{color:0xe08072,opacity:0.5,transparent:true},
-  VH_M_pupil_L:{color:0x101418,roughness:0.95},
+  VH_M_pupil_L:{color:0x030609,roughness:0.98},
   VH_M_retina_L:{color:0x995a61},
   VH_M_fovea_L:{color:0xd9994d},
   VH_M_macula_lutea_L:{color:0xcca640},
@@ -104,7 +104,7 @@ const anatomyStyle = {
   VH_M_sclera_L:{color:0xf2eee3,roughness:0.62},
   VH_M_suspensory_ligament_of_lens_L:{color:0xc4d2d6,opacity:0.82,transparent:true,roughness:0.45},
   VH_M_trabecular_meshwork_L:{color:0xc7a059},
-  VH_M_vitreous_humor_L:{color:0x99b3cc,opacity:0.12,transparent:true,roughness:0.1}
+  VH_M_vitreous_humor_L:{color:0x99b3cc,opacity:0.045,transparent:true,roughness:0.08}
 };
 
 const initiallyHidden = new Set([
@@ -198,7 +198,10 @@ function resize() {
 window.addEventListener('resize',resize); resize();
 
 function resetCamera() {
-  camera.position.set(0,1.05,8.2);
+  // Oblique lateral-anterior view: exposes the cornea-to-retina axis and
+  // avoids the gear-like straight-on appearance of the ciliary processes.
+  if (mode === 'anatomy') camera.position.set(6.2,1.3,2.8);
+  else camera.position.set(0,1.05,8.2);
   controls.target.set(0,0.02,0);
   controls.update();
 }
