@@ -1,25 +1,32 @@
 SUBA AI – Human Eye Anatomy Lab: third-party asset notices
 
-1) Internal anatomical eye model
-Project: Ocularium
-Source repository: https://github.com/huahbo/ocularium
-Underlying library: Human Reference Atlas (HRA) 3D Reference Object Library
-Library source: https://humanatlas.io/3d-reference-library
-The Ocularium project identifies the HRA-derived model asset as Creative Commons Attribution 4.0 International (CC BY 4.0).
-Licence: https://creativecommons.org/licenses/by/4.0/
-Retain required credit and notices when redistributing or adapting the asset.
-The GLB used here has 23 separately named meshes. It does not provide a separately named optic nerve mesh.
+1) Active internal cross-section eye model
+Title: Cross Section of Eye - Anatomy
+Creator: Erik Ao (Sketchfab)
+Creator profile: https://sketchfab.com/erikao
+Source model: https://sketchfab.com/3d-models/cross-section-of-eye-anatomy-4bf3236c8fe2407ea3f494a93b8f5aa2
+Licence embedded in the uploaded GLB metadata: CC-BY-4.0
+Licence text: https://creativecommons.org/licenses/by/4.0/
+This repository includes an optimised derivative for browser delivery. It retains the source model's 54 mesh objects and embedded asset metadata; texture images were resized/re-encoded and vertex normals are reconstructed at runtime. Credit Erik Ao and link to the source model when redistributing or adapting.
 
 2) Exterior eye model
 Creator: DEGUIDER (Sketchfab)
 Model: Human Eye
 Source: https://sketchfab.com/3d-models/human-eye-b68ae822b45443edb812950993ece362
-The Sketchfab listing identifies the model as CC BY. Retain creator attribution and source link when redistributing/adapting.
+The Sketchfab listing identifies this model as Creative Commons Attribution (CC BY). Retain creator attribution and source link when redistributing/adapting.
 Licence: https://creativecommons.org/licenses/by/4.0/
 
-3) Three.js and Draco
-Three.js: https://github.com/mrdoob/three.js
-Google Draco decoder: https://github.com/google/draco
-The viewer loads Google's Draco 1.5.7 decoders from https://www.gstatic.com/draco/versioned/decoders/1.5.7/
+3) Backup HRA-derived anatomy model
+Project: Ocularium
+Source repository: https://github.com/huahbo/ocularium
+Underlying library: Human Reference Atlas 3D Reference Object Library
+Library: https://humanatlas.io/3d-reference-library
+The Ocularium project identifies the HRA-derived model as CC BY 4.0.
+Licence: https://creativecommons.org/licenses/by/4.0/
+This backup model is not loaded by the active Anatomy view.
 
-These notices summarize upstream statements reviewed during preparation. Re-check source pages and bundled notices before redistribution, especially commercial deployment. This repository does not relicense third-party assets.
+4) Three.js
+Source: https://github.com/mrdoob/three.js
+The viewer loads Three.js modules from jsDelivr CDN.
+
+These notices reflect metadata embedded in the supplied GLB and the source listings reviewed during preparation. Preserve required attribution and re-check source pages before commercial redistribution. This repository does not relicense third-party assets.
