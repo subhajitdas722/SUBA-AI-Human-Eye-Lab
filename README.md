@@ -89,3 +89,8 @@ The Student Learning Studio includes a separate optics simulator for:
 Students can switch between uncorrected and corrected schematic ray diagrams, read the optical explanation, and answer a short self-check question for each defect. Two additional flashcards and optics glossary terms cover astigmatism and lens power.
 
 **Teaching note:** Ray diagrams are conceptual and not to scale. Lens prescriptions are individual; the simulator does not calculate a clinical prescription. Students should understand that a qualified eye examination is needed to determine the appropriate correction.
+
+
+## Textbook reference diagram
+
+The Vision Defects & Correction Lab includes a responsive vector reference plate at `assets/vision-defects-textbook.svg`, comparing myopia, hypermetropia, presbyopia and astigmatism before and after correction. The diagram is conceptual and not to scale.
