@@ -1,33 +1,33 @@
 # SUBA AI – Human Eye Anatomy Lab
 
-Interactive 3D educational eye viewer built with Three.js.
+Interactive 3D teaching viewer with two views:
 
-## Included in this repository
+- **Anatomy:** detailed cross-section model by Erik Ao, containing 54 GLB mesh objects arranged in anatomical groups.
+- **Exterior:** DEGUIDER's separate exterior-eye model.
 
-- `index.html`, `style.css`, `app.js`: responsive web viewer
-- `licenses/`: model attribution and third-party notices
-- `models/README.md`: exact locations and names for the two required binary models
+## Required model files
 
-## Required GLB uploads
+Inside the repository's `models/` folder:
 
-The web viewer source is committed, but the GLB files are binary and still need to be uploaded through GitHub's browser interface.
+- `eye-cross-section.glb.gz` — optimised gzip-compressed version of the 54-mesh cross-section GLB by Erik Ao. The viewer decompresses it in the browser using the native `DecompressionStream` API.
+- `human_eye.glb` — DEGUIDER exterior-eye model.
+
+The older `eye-anatomy.glb` HRA model is retained in the repository as a backup but is no longer used by the Anatomy view.
+
+## Upload the new cross-section model
+
+Download the optimised file supplied in this chat, then:
 
 1. Open the [models folder](https://github.com/subhajitdas722/SUBA-AI-Human-Eye-Lab/tree/main/models).
 2. Select **Add file → Upload files**.
-3. Upload these two files, keeping the exact filenames:
-   - `eye-anatomy.glb` — from the Ocularium archive: `ocularium-main/public/models/eye-anatomy.glb`.
-   - `human_eye.glb` — your downloaded DEGUIDER Sketchfab exterior model.
-4. Commit the upload to the `main` branch.
+3. Upload the file and rename it exactly to `eye-cross-section.glb.gz`.
+4. Commit the upload to branch `main`.
 
-The viewer loads the GLB assets from these paths:
-- `./models/eye-anatomy.glb`
-- `./models/human_eye.glb`
+The optimised upload is approximately 21 MB. Its embedded GLB retains 54 mesh objects, original material references, embedded texture imagery (resized to 1024 px JPEG), and the Sketchfab attribution metadata. Vertex normals are reconstructed by the viewer at load time to reduce file size.
 
-The internal HRA-derived GLB is Draco-compressed. The viewer loads the Google Draco 1.5.7 decoder from Google's CDN; no local Draco decoder files need to be uploaded. Internet access is required for Three.js modules and the decoder.
+The web viewer uses Three.js from jsDelivr. It also uses the browser's native gzip decompression support; use a current Chrome or Edge browser.
 
 ## Run locally
-
-From the repository root:
 
 ```bash
 python -m http.server 8000
@@ -45,11 +45,11 @@ Open http://localhost:8000. Do not open the page with `file://`.
 Published address:
 https://subhajitdas722.github.io/SUBA-AI-Human-Eye-Lab/
 
-## Licence and attribution
+## Attribution and licences
 
-- The HRA-derived anatomical model via Ocularium is identified by the upstream project as CC BY 4.0. See `licenses/ATTRIBUTION.txt`.
-- The DEGUIDER exterior Sketchfab model is identified by the source listing as CC BY. Preserve creator credit and source link.
-- The Science Museum Group scan is not included because its CC BY-NC licence restricts commercial use.
-- Three.js and Draco are third-party libraries; see `licenses/THIRD_PARTY.txt`.
+- Cross-section model: **Erik Ao**, “Cross Section of Eye - Anatomy”, CC BY 4.0. See `licenses/ATTRIBUTION.txt`.
+- Exterior model: **DEGUIDER**, “Human Eye”, CC BY according to the Sketchfab listing. See attribution file.
+- The older HRA-derived model remains in this repository as a backup and is identified upstream as CC BY 4.0.
+- Three.js is a third-party runtime; see its source project.
 
-The internal model has 23 named meshes. It does not contain an individually named optic nerve mesh. The layer list should not be interpreted as a guarantee that every anatomical term is an isolated biological tissue.
+The new cross-section model contains 54 mesh objects, including grouped pieces for structures such as sclera, choroid and retina. The UI groups related meshes where appropriate. Do not assume every mesh corresponds to a unique biological tissue.
