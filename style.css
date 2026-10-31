@@ -72,3 +72,12 @@ input[type=range]{width:100%;accent-color:#52cbc5}.wide{width:100%;margin-top:12
  .callout-index{width:20px;height:20px;border-radius:6px;font-size:9px}
  .callout-kicker{font-size:6px}.callout-title{font-size:9px}.callout-chevron{font-size:10px}
 }
+
+.anatomy-callout:focus-visible{outline:2px solid #9af6e9;outline-offset:3px}
+.callout-anchor-halo{animation:anatomy-pin-breathe 2.8s ease-out infinite}
+.callout-anchor-halo.is-active{animation:none}
+@keyframes anatomy-pin-breathe{
+ 0%{stroke-opacity:.9;stroke-width:1.4}
+ 70%{stroke-opacity:.25;stroke-width:4.5}
+ 100%{stroke-opacity:.9;stroke-width:1.4}
+}
