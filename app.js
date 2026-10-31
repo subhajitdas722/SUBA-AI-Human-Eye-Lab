@@ -15,6 +15,14 @@ renderer.toneMappingExposure=1.05;
 renderer.shadowMap.enabled=false;
 stage.appendChild(renderer.domElement);
 
+const labelLayer=document.createElement('div');
+labelLayer.id='modelLabelLayer';
+labelLayer.setAttribute('aria-hidden','true');
+const labelSvg=document.createElementNS('http://www.w3.org/2000/svg','svg');
+labelSvg.classList.add('model-label-lines');
+labelLayer.appendChild(labelSvg);
+stage.appendChild(labelLayer);
+
 const controls=new OrbitControls(camera,renderer.domElement);
 controls.enableDamping=true;
 controls.dampingFactor=0.055;
@@ -37,6 +45,9 @@ const loader=new GLTFLoader();
 let mode='anatomy';
 let anatomyModel=null, exteriorModel=null;
 let entities=[];
+let exteriorEntities=[];
+let labelItems=[];
+let labelsEnabled=true;
 let selected=null;
 let exploded=false;
 let normalCamera={position:new THREE.Vector3(6.2,1.2,4.3),target:new THREE.Vector3(0,0,0)};
@@ -66,8 +77,105 @@ function showMessage(message,isError=false){
 function resize(){
  const w=stage.clientWidth,h=stage.clientHeight;
  camera.aspect=w/h;camera.updateProjectionMatrix();renderer.setSize(w,h,false);
+ labelSvg.setAttribute('viewBox',`0 0 ${w} ${h}`);
+ labelSvg.setAttribute('width',w);
+ labelSvg.setAttribute('height',h);
 }
 window.addEventListener('resize',resize);resize();
+
+function activeEntities(){
+ return mode==='anatomy'?entities:exteriorEntities;
+}
+function buildModelLabels(){
+ labelItems=[];
+ labelLayer.querySelectorAll('.model-label').forEach(el=>el.remove());
+ labelSvg.innerHTML='';
+ const source=activeEntities();
+ const anatomyOrder=['Cornea','Iris','Crystalline lens','Suspensory ligaments','Sclera','Choroid','Muscle group 1','Muscle group 2','Retina','Artery','Vein'];
+ const ordered=mode==='anatomy'
+  ? anatomyOrder.map(name=>source.find(entity=>entity.label===name)).filter(Boolean)
+  : ['Eye body','Iris'].map(name=>source.find(entity=>entity.label===name)).filter(Boolean);
+ ordered.forEach(entity=>{
+  const el=document.createElement('div');
+  el.className='model-label';
+  el.textContent=entity.label;
+  labelLayer.appendChild(el);
+  const line=document.createElementNS('http://www.w3.org/2000/svg','line');
+  line.setAttribute('stroke','rgba(108,220,211,.88)');
+  line.setAttribute('stroke-width','1.4');
+  line.setAttribute('stroke-linecap','round');
+  labelSvg.appendChild(line);
+  const dot=document.createElementNS('http://www.w3.org/2000/svg','circle');
+  dot.setAttribute('r','3');
+  dot.setAttribute('fill','#6bded4');
+  dot.setAttribute('stroke','#09202b');
+  dot.setAttribute('stroke-width','1');
+  labelSvg.appendChild(dot);
+  labelItems.push({entity,el,line,dot,point:new THREE.Vector3(),x:0,y:0,side:'left'});
+ });
+ updateModelLabels();
+}
+function updateModelLabels(){
+ if(!labelsEnabled || !labelItems.length || !labelLayer.isConnected){
+  labelLayer.style.display='none';
+  return;
+ }
+ labelLayer.style.display='block';
+ const width=stage.clientWidth,height=stage.clientHeight;
+ const visible=[];
+ labelItems.forEach(item=>{
+  const isVisible=item.entity.objects.some(obj=>obj.visible);
+  if(!isVisible){item.el.style.display='none';item.line.style.display='none';item.dot.style.display='none';return;}
+  const box=new THREE.Box3();
+  item.entity.objects.forEach(obj=>box.expandByObject(obj));
+  if(box.isEmpty()){item.el.style.display='none';item.line.style.display='none';item.dot.style.display='none';return;}
+  const center=box.getCenter(item.point);
+  center.project(camera);
+  if(center.z < -1 || center.z > 1){item.el.style.display='none';item.line.style.display='none';item.dot.style.display='none';return;}
+  const x=(center.x*.5+.5)*width;
+  const y=(-center.y*.5+.5)*height;
+  if(x < -12 || x > width+12 || y < -12 || y > height+12){item.el.style.display='none';item.line.style.display='none';item.dot.style.display='none';return;}
+  item.x=x;item.y=y;item.side=x<width*.5?'left':'right';
+  visible.push(item);
+ });
+ const left=visible.filter(x=>x.side==='left').sort((a,b)=>a.y-b.y);
+ const right=visible.filter(x=>x.side==='right').sort((a,b)=>a.y-b.y);
+ const labelWidth=width<600?112:136;
+ const columnX={left:8,right:Math.max(8,width-labelWidth-8)};
+ for(const [side,items] of [['left',left],['right',right]]){
+  if(!items.length)continue;
+  const top=16,bottom=height-16;
+  const gap=Math.min(30,(bottom-top)/Math.max(1,items.length-1));
+  const ys=items.map(item=>THREE.MathUtils.clamp(item.y,top,bottom));
+  for(let i=1;i<ys.length;i++)ys[i]=Math.max(ys[i],ys[i-1]+gap);
+  if(ys[ys.length-1]>bottom){
+   const shift=ys[ys.length-1]-bottom;
+   for(let i=0;i<ys.length;i++)ys[i]-=shift;
+  }
+  for(let i=ys.length-2;i>=0;i--)ys[i]=Math.min(ys[i],ys[i+1]-gap);
+  if(ys[0]<top){
+   const shift=top-ys[0];
+   for(let i=0;i<ys.length;i++)ys[i]+=shift;
+  }
+  items.forEach((item,i)=>{
+   const x=columnX[side],y=ys[i];
+   item.el.style.display='block';
+   item.el.style.left=x+'px';
+   item.el.style.top=(y-12)+'px';
+   item.el.style.width=labelWidth+'px';
+   const labelEdge=side==='left'?x+labelWidth:x;
+   item.line.style.display='block';
+   item.line.setAttribute('x1',labelEdge);
+   item.line.setAttribute('y1',y);
+   item.line.setAttribute('x2',item.x);
+   item.line.setAttribute('y2',item.y);
+   item.dot.style.display='block';
+   item.dot.setAttribute('cx',item.x);
+   item.dot.setAttribute('cy',item.y);
+  });
+ }
+}
+
 
 function cloneMeshMaterials(model){
  model.traverse(o=>{
@@ -158,6 +266,15 @@ function fitExterior(gltf){
  cloneMeshMaterials(model);
  normalizeModel(model,null,3.45);
  exteriorPivot.clear();exteriorPivot.add(model);
+ let eyeBody=null,iris=null;
+ model.traverse(obj=>{
+  if(obj.isMesh && obj.name==='Eye_Eye_0')eyeBody=obj;
+  if(obj.isMesh && obj.name==='Eye_Iris_0')iris=obj;
+ });
+ exteriorEntities=[
+  ...(eyeBody?[{label:'Eye body',objects:[eyeBody],description:'Main exterior eye-body mesh from the DEGUIDER Sketchfab model. The source GLB does not separate the cornea and sclera into their own meshes.'}]:[]),
+  ...(iris?[{label:'Iris',objects:[iris],description:'Iris mesh from the DEGUIDER Sketchfab exterior model.'}]:[])
+ ];
  return model;
 }
 function applyEntityOpacity(entity,value){
@@ -186,7 +303,7 @@ function selectEntity(entity){
 }
 function buildList(){
  const list=document.querySelector('#structureList');list.innerHTML='';
- entities.forEach(entity=>{
+ activeEntities().forEach(entity=>{
   const row=document.createElement('div');row.className='structure';row.dataset.entity=entity.label;
   const eye=document.createElement('input');eye.type='checkbox';eye.checked=entityIsVisible(entity);eye.title='Show or hide';
   eye.onchange=()=>setEntityVisible(entity,eye.checked);
@@ -235,6 +352,16 @@ function setMode(next){
 }
 
 document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>setMode(b.dataset.mode));
+const labelToggle=document.querySelector('#showLabels');
+if(labelToggle){
+ labelToggle.setAttribute('aria-pressed','true');
+ labelToggle.onclick=()=>{
+  labelsEnabled=!labelsEnabled;
+  labelToggle.textContent=labelsEnabled?'Hide labels':'Show labels';
+  labelToggle.setAttribute('aria-pressed',String(labelsEnabled));
+  updateModelLabels();
+ };
+}
 document.querySelector('#search').oninput=e=>{
  const q=e.target.value.toLowerCase();
  document.querySelectorAll('.structure').forEach(row=>row.style.display=row.textContent.toLowerCase().includes(q)?'flex':'none');
@@ -249,13 +376,17 @@ document.querySelector('#hideSelected').onclick=()=>{
  if(selected){setEntityVisible(selected,false);selectEntity(null);buildList();}
 };
 document.querySelector('#showAll').onclick=()=>{
- entities.forEach(e=>setEntityVisible(e,true));
+ activeEntities().forEach(e=>setEntityVisible(e,true));
  buildList();selectEntity(null);
 };
 document.querySelector('#isolate').onclick=()=>{
- if(selected){entities.forEach(e=>setEntityVisible(e,e===selected));buildList();}
+ if(selected){activeEntities().forEach(e=>setEntityVisible(e,e===selected));buildList();}
 };
-document.querySelector('#reset').onclick=()=>resetAnatomy();
+document.querySelector('#reset').onclick=()=>{
+ if(mode==='anatomy')resetAnatomy();
+ else {exteriorEntities.forEach(e=>setEntityVisible(e,true));buildList();selectEntity(null);controls.target.set(0,0,0);camera.position.set(0,0.8,7.2);controls.update();}
+ buildModelLabels();
+};
 document.querySelector('#explode').onclick=()=>{
  if(mode!=='anatomy')return;
  exploded=!exploded;
@@ -288,6 +419,7 @@ async function start(){
   buildList();
   document.querySelector('#loading').hidden=true;
   resetAnatomy();
+  buildModelLabels();
  }catch(e){
   console.error('Cross-section model load failed:',e);
   showMessage('Could not load eye-cross-section.glb.gz. Upload the compressed GLB into the models folder, then refresh. '+(e?.message||e),true);
@@ -295,10 +427,11 @@ async function start(){
  try{
   const gltf=await loader.loadAsync('./models/human_eye.glb');
   exteriorModel=fitExterior(gltf);
+  if(mode==='exterior'){buildList();buildModelLabels();}
  }catch(e){
   console.warn('Exterior model could not be loaded:',e);
  }
 }
-function animate(){requestAnimationFrame(animate);controls.update();renderer.render(scene,camera);}
+function animate(){requestAnimationFrame(animate);controls.update();updateModelLabels();renderer.render(scene,camera);}
 start();
 animate();
