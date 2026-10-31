@@ -597,6 +597,9 @@ const studyFlashcards=[
  {category:'VISION DEFECTS',front:'What is myopia?',back:'Myopia (short-sightedness) makes distant objects appear blurred. The image tends to form in front of the retina. It is corrected using a diverging (concave) lens.'},
  {category:'VISION DEFECTS',front:'What is hypermetropia?',back:'Hypermetropia (long-sightedness) makes nearby objects appear blurred. The image tends to form behind the retina. It is corrected using a converging (convex) lens.'},
  {category:'VISION DEFECTS',front:'What is presbyopia?',back:'Presbyopia is an age-related reduction in the eye’s accommodation, often making near focusing difficult. Suitable near correction may use convex lenses; some people need bifocal or progressive lenses.'},
+ {category:'VISION DEFECTS',front:'What is astigmatism?',back:'Astigmatism is caused by unequal curvature in different meridians of the cornea or lens. Regular astigmatism is commonly corrected with cylindrical or toric lenses.'},
+ {category:'VISION DEFECTS',front:'What is the unit of lens power?',back:'The dioptre (D). Lens power P = 1/f when focal length f is measured in metres.'},
+
  {category:'VISION DEFECTS',front:'What is the near point of a normal young adult eye?',back:'The conventional least distance of distinct vision is approximately 25 cm for a normal adult eye.'}
 ];
 const studyQuestions=[
@@ -612,6 +615,12 @@ const studyQuestions=[
 const studyGlossary=[
  ['Accommodation','The process by which the eye changes the focal length of its lens to focus objects at different distances.'],
  ['Aqueous humour','A clear fluid in the front part of the eye that nourishes the cornea and lens and helps maintain intraocular pressure.'],
+ ['Astigmatism','A refractive error in which unequal curvature in different meridians prevents light from focusing to one sharp point.'],
+ ['Cylindrical lens','A lens whose optical power acts in one principal meridian; it is used in correcting astigmatism.'],
+ ['Converging lens','A lens that brings parallel rays closer together; a convex lens is converging.'],
+ ['Diverging lens','A lens that spreads parallel rays apart; a concave lens is diverging.'],
+ ['Dioptre','The unit of lens power. Lens power in dioptres is the reciprocal of focal length in metres.'],
+
  ['Blind spot','The optic disc, where the optic nerve exits the eye. It has no photoreceptors.'],
  ['Ciliary muscle','A ring of smooth muscle that changes tension on the suspensory ligaments during accommodation.'],
  ['Choroid','A vascular, pigmented layer between the sclera and retina.'],
@@ -946,7 +955,7 @@ function makeDiagramSvg(defect,corrected){
   }
  }
  const retinaNote=corrected?'RAYS BROUGHT TO RETINAL PLANE':'SCHEMATIC RAY PATH';
- return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 300" role="img" aria-label="'+visionDefects[defect].name+(corrected?' with corrective lens':' without correction')+'">'+
+ return '<svg id="defectRayDiagram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 300" role="img" aria-label="'+visionDefects[defect].name+(corrected?' with corrective lens':' without correction')+'">'+
   commonStart+corrective+paths+focus+
   '<text x="392" y="286" text-anchor="middle" class="small-label">EYE</text>'+
   '<text x="700" y="286" text-anchor="end" class="small-label">'+retinaNote+'</text></svg>';
