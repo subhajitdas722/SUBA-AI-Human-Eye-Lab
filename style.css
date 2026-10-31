@@ -24,3 +24,9 @@ aside{display:flex;flex-direction:column;gap:14px}.panel{padding:16px}
 input[type=range]{width:100%;accent-color:#52cbc5}.wide{width:100%;margin-top:12px}
 .note{border-color:#31516a}.note b{color:#75d7d1}footer{text-align:center;padding:20px}code{color:#b6d9e5}
 @media(max-width:900px){main{grid-template-columns:1fr;padding:12px}.viewer{order:0}aside{order:1}#stage{height:58vh;min-height:350px}.viewbar{align-items:flex-start;gap:12px;flex-wrap:wrap}}
+/* 3D model labels */
+#modelLabelLayer{position:absolute;inset:0;z-index:4;pointer-events:none;overflow:hidden}
+.model-label-lines{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+.model-label{position:absolute;min-height:24px;padding:4px 8px 4px 10px;border:1px solid rgba(103,218,211,.52);border-radius:7px;background:rgba(7,20,32,.9);color:#effbff;font-size:11px;line-height:1.35;font-weight:650;letter-spacing:.01em;white-space:normal;text-align:center;box-shadow:0 3px 12px rgba(0,0,0,.28);backdrop-filter:blur(5px);pointer-events:none}
+#showLabels[aria-pressed="true"]{border-color:#47bdb7;background:#155e68}
+@media(max-width:600px){.model-label{font-size:9px;padding:3px 5px;min-height:20px;border-radius:5px}}
