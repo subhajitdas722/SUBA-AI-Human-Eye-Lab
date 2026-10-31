@@ -75,3 +75,17 @@ The page also includes a browser-based study area:
 - **Glossary:** searchable definitions for 19 key anatomy and vision terms.
 
 Lesson completion is stored locally in the student's browser using local storage. It is not sent to a server or shared between devices. Quiz attempts are not uploaded; the score is displayed in the browser.
+
+
+## Vision Defects & Correction Lab
+
+The Student Learning Studio includes a separate optics simulator for:
+
+- **Myopia (short-sightedness):** image tends to form in front of the retina; corrected with a concave (diverging) lens.
+- **Hypermetropia (long-sightedness):** near-object image tends to form behind the retina; corrected with a convex (converging) lens.
+- **Presbyopia:** age-related reduction in accommodation; near addition is commonly provided by convex reading lenses, bifocals or progressive lenses as appropriate.
+- **Astigmatism:** unequal refractive power in different meridians; regular astigmatism is commonly corrected with cylindrical or toric lenses.
+
+Students can switch between uncorrected and corrected schematic ray diagrams, read the optical explanation, and answer a short self-check question for each defect. Two additional flashcards and optics glossary terms cover astigmatism and lens power.
+
+**Teaching note:** Ray diagrams are conceptual and not to scale. Lens prescriptions are individual; the simulator does not calculate a clinical prescription. Students should understand that a qualified eye examination is needed to determine the appropriate correction.
