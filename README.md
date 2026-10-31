@@ -53,3 +53,13 @@ https://subhajitdas722.github.io/SUBA-AI-Human-Eye-Lab/
 - Three.js is a third-party runtime; see its source project.
 
 The new cross-section model contains 54 mesh objects, including grouped pieces for structures such as sclera, choroid and retina. The UI groups related meshes where appropriate. Do not assume every mesh corresponds to a unique biological tissue.
+
+
+## On-model labels
+
+Both 3D views now include live-positioned labels with leader lines:
+
+- Cross-section labels: cornea, iris, crystalline lens, suspensory ligaments, sclera, choroid, muscle groups, retina, artery and vein.
+- Exterior labels: eye body and iris, matching the two independently named meshes in the exterior GLB.
+
+Use the **Hide labels / Show labels** control below the 3D viewer to toggle annotations. Labels follow the model as it rotates and zooms. The exterior asset does not provide separate cornea or sclera meshes, so its label identifies the main mesh as the eye body rather than claiming more detail than the file contains.
