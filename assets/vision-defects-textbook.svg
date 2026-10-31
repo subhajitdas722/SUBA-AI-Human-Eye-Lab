@@ -86,7 +86,7 @@
     <path d="M149 110 Q174 145 149 180 Q125 145 149 110Z" fill="#9bd7ec" stroke="#377f9f" stroke-width="2.5"/>
     <path d="M255 104 Q278 145 255 186" fill="none" stroke="#b43f45" stroke-width="5"/>
     <path d="M270 145 L320 145" stroke="#e0a34d" stroke-width="9" stroke-linecap="round"/>
-    <path d="M8 145 L66 145 L120 111 L166 124 L270 145" class="ray"/><path d="M8 145 L66 145 L120 179 L166 166 L270 145" class="ray"/><circle cx="270" cy="145" r="6" class="goodfocus"/><text x="270" y="77" text-anchor="middle" class="tiny">Focus on retina</text>
+    <path d="M8 145 L66 122 L120 112 L166 124 L270 145" class="ray"/><path d="M8 145 L66 168 L120 178 L166 166 L270 145" class="ray"/><circle cx="270" cy="145" r="6" class="goodfocus"/><text x="270" y="77" text-anchor="middle" class="tiny">Focus on retina</text>
     <text x="149" y="205" class="tiny" text-anchor="middle">Eye lens</text><text x="269" y="96" class="tiny" text-anchor="middle">Retina</text>
   </svg>
     </g>
@@ -125,7 +125,7 @@
     <path d="M149 110 Q174 145 149 180 Q125 145 149 110Z" fill="#9bd7ec" stroke="#377f9f" stroke-width="2.5"/>
     <path d="M255 104 Q278 145 255 186" fill="none" stroke="#b43f45" stroke-width="5"/>
     <path d="M270 145 L320 145" stroke="#e0a34d" stroke-width="9" stroke-linecap="round"/>
-    <path d="M8 145 L66 145 L120 111 L166 124 L270 145" class="ray"/><path d="M8 145 L66 145 L120 179 L166 166 L270 145" class="ray"/><circle cx="270" cy="145" r="6" class="goodfocus"/><text x="270" y="77" text-anchor="middle" class="tiny">Focus on retina</text>
+    <path d="M8 145 L66 122 L120 112 L166 124 L270 145" class="ray"/><path d="M8 145 L66 168 L120 178 L166 166 L270 145" class="ray"/><circle cx="270" cy="145" r="6" class="goodfocus"/><text x="270" y="77" text-anchor="middle" class="tiny">Focus on retina</text>
     <text x="149" y="205" class="tiny" text-anchor="middle">Eye lens</text><text x="269" y="96" class="tiny" text-anchor="middle">Retina</text>
   </svg>
     </g>
