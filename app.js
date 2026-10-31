@@ -310,7 +310,7 @@ function buildList(){
   const label=document.createElement('span');label.className='name';label.textContent=entity.label;label.onclick=()=>selectEntity(entity);
   const focus=document.createElement('button');focus.textContent='Focus';
   focus.onclick=()=>{
-   entities.forEach(e=>setEntityVisible(e,e===entity));
+   activeEntities().forEach(e=>setEntityVisible(e,e===entity));
    focusEntity(entity);selectEntity(entity);buildList();
   };
   row.append(eye,label,focus);list.append(row);
@@ -343,12 +343,12 @@ function setMode(next){
  document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b.dataset.mode===mode));
  document.querySelector('#modeTitle').textContent=mode==='anatomy'?'Human eye cross-section':'Exterior view';
  anatomyPivot.visible=mode==='anatomy';exteriorPivot.visible=mode==='exterior';
- if(mode==='anatomy')buildList();
- else document.querySelector('#structureList').innerHTML='<p class="hint">Exterior model by DEGUIDER. Switch back to Anatomy to inspect the supplied 54-mesh cross-section model.</p>';
+ buildList();
  selectEntity(null);
  controls.target.set(0,0,0);
  camera.position.copy(mode==='anatomy'?normalCamera.position:new THREE.Vector3(0,0.8,7.2));
  controls.update();
+ buildModelLabels();
 }
 
 document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>setMode(b.dataset.mode));
