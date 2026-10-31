@@ -63,3 +63,15 @@ Both 3D views now include live-positioned labels with leader lines:
 - Exterior labels: eye body and iris, matching the two independently named meshes in the exterior GLB.
 
 Use the **Hide labels / Show labels** control below the 3D viewer to toggle annotations. Labels follow the model as it rotates and zooms. The exterior asset does not provide separate cornea or sclera meshes, so its label identifies the main mesh as the eye body rather than claiming more detail than the file contains.
+
+
+## Student Learning Studio
+
+The page also includes a browser-based study area:
+
+- **Guided lessons:** six short anatomy lessons with exam reminders, a 3D focus shortcut, and per-browser revision progress.
+- **Flashcards:** 12 active-recall cards covering anatomy and common vision defects.
+- **Quick quiz:** eight multiple-choice questions with instant feedback and explanations.
+- **Glossary:** searchable definitions for 19 key anatomy and vision terms.
+
+Lesson completion is stored locally in the student's browser using local storage. It is not sent to a server or shared between devices. Quiz attempts are not uploaded; the score is displayed in the browser.
