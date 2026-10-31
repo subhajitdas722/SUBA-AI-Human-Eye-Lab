@@ -17,7 +17,7 @@
  <div class="viewbar"><div><span class="eyebrow">3D SPECIMEN</span><h1 id="modeTitle">Internal anatomy</h1></div>
  <div class="tabs"><button class="tab active" data-mode="anatomy">Anatomy</button><button class="tab" data-mode="exterior">Exterior</button></div></div>
  <div id="stage"><div id="loading">Loading anatomical GLB…</div></div>
- <div class="toolbar"><button id="reset">Reset view</button><button id="isolate">Isolate selected</button><button id="showAll">Show all</button><button id="explode">Explode layers</button></div>
+ <div class="toolbar"><button id="reset">Reset view</button><button id="showLabels" aria-pressed="true">Hide labels</button><button id="isolate">Isolate selected</button><button id="showAll">Show all</button><button id="explode">Explode layers</button></div>
  <p class="hint">Drag to rotate · Scroll/pinch to zoom · Select a structure from the list</p>
 </section>
 <aside>
@@ -30,7 +30,7 @@
  <label class="rangeLabel">Opacity <output id="opacityValue">100%</output></label><input id="opacity" type="range" min="10" max="100" value="100">
  <button id="hideSelected" class="wide">Hide selected</button>
  </section>
- <section class="panel note"><b>Teaching note</b><p>This anatomy model contains 23 separately named GLB meshes. Some anatomical regions are grouped in the source model; do not interpret each mesh as a histologically isolated tissue.</p></section>
+ <section class="panel note"><b>Teaching note</b><p>The cross-section model contains 54 mesh objects grouped into named anatomical parts. The exterior model contains two separately labelled meshes: eye body and iris. Some grouped structures are not separate biological tissues.</p></section>
 </aside>
 </main>
 <footer>SUBA AI · Educational visualization · Not for clinical diagnosis · Model attribution in <code>licenses/ATTRIBUTION.txt</code></footer>
